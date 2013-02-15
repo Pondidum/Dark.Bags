@@ -1,0 +1,42 @@
+
+Relevent Events
+==============================
+
+BAG_CLOSED					Fires when one of the player's containers is closed
+BAG_OPEN					Fires when one of the player's containers is opened
+BAG_UPDATE					Fires when the contents of one of the player's containers change
+BAG_UPDATE_COOLDOWN			Fires when the cooldown begins or ends for an item in one of the player's containers
+BAG_UPDATE_DELAYED			Batched version of BAG_UPDATE - no arguments passed
+
+GUILDBANKBAGSLOTS_CHANGED	Fires when information about the contents of guild bank item slots changes or becomes available
+
+ITEM_LOCKED					Fires when an item in the player's bags or equipped inventory is locked for moving
+ITEM_LOCK_CHANGED			Fires when an item in the player's bags or equipped inventory is locked for moving or unlocked afterward
+ITEM_UNLOCKED				Fires when an item in the player's bags or equipped inventory is unlocked after moving
+
+PLAYERBANKBAGSLOTS_CHANGED	Fires when the number of bank bag slots purchased by the player changes
+PLAYERBANKSLOTS_CHANGED		Fires when the contents of a bank slot or bank bag slot are changed
+
+
+Constants
+=============================
+
+NUM_BAG_SLOTS				0 -> NUM_BAG_SLOTS == player bags
+NUM_BANKBAGSLOTS			NUM_BAG_SLOTS + 1 -> NUM_BAG_SLOTS + NUM_BANKBAGSLOTS == bank bag
+Hmmm
+=============================
+
+BagUpdateDelayed => Range(1, BAGS).SelectMany(bag => Range(1, GetBagSize(bag)).Select(slot => itemModel.new(bag, slot, GetItemInfo(bag, slot))) )
+
+
+local items = {}
+
+for bag = 0, NUM_BAG_SLOTS do
+	
+	for slot = 1, GetContainerNumSlots(bag) do
+
+		table.insert(items, itemModel.new(bag, slot))
+		
+	end
+
+end

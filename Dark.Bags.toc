@@ -1,0 +1,12 @@
+## Interface: 50001
+## Title: Dark.Bags
+## Author: Darkend / Singularity / Zenedar / EU
+## Version: 0.0.1
+## Notes: Bags
+## RequiredDeps: Dark.Core
+
+initialise.lua
+
+itemModel.lua
+bagModel.lua
+containerModel.lua
