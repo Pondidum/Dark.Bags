@@ -13,12 +13,20 @@ local itemModel = {
 			quality	 = 0,
 			readable = nil,
 			lootable = nil,
+			cooldownStart = 0,
+			cooldownDuration = 0,
 		}
 
 		this.update = function()
 
-			local texture, count, locked, badQuality, readable, lootable, link = GetContainerItemInfo(bagID, slotID)
-			local name, itemLink, itemQuality = GetItemInfo(link)
+			local texture, count, locked, badQuality, readable, lootable, link = GetContainerItemInfo(bagID, slotID)		
+			local name, itemLink, itemQuality 
+
+			if link then
+				name, itemLink, itemQuality = GetItemInfo(link)
+			end
+
+			local start, duration = GetContainerItemCooldown(bagID, slotID)
 
 			this.name = name
 			this.texture = texture
@@ -28,6 +36,18 @@ local itemModel = {
 			this.quality = itemQuality
 			this.readable = readable
 			this.lootable = lootable
+
+			this.cooldownStart = start
+			this.cooldownDuration = duration
+
+		end
+
+		this.updateCooldown = function()
+
+			local start, duration = GetContainerItemCooldown(bagID, slotID)
+
+			this.cooldownStart = start
+			this.cooldownDuration = duration
 
 		end
 
@@ -48,8 +68,10 @@ local itemModel = {
 								this.count))
 		end
 
+		this.update()
+
 		return this
-		
+
 	end,
 
 }
