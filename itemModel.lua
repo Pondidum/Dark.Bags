@@ -4,33 +4,52 @@ local itemModel = {
 	
 	new = function(bagID, slotID)
 
-		local this = {}
+		local this = {
+			name	 = "",
+			texture	 = "",
+			link	 = "",
+			count	 = 0,
+			locked	 = nil,
+			quality	 = 0,
+			readable = nil,
+			lootable = nil,
+		}
 
-		local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bagID, slotID)
+		this.update = function()
 
-		this.texture = texture
-		this.count = count
-		this.locked = locked
-		this.quality = quality
-		this.readable = readable
-		this.lootable = lootable
-		this.link = link
+			local texture, count, locked, badQuality, readable, lootable, link = GetContainerItemInfo(bagID, slotID)
+			local name, itemLink, itemQuality = GetItemInfo(link)
 
-		local isInSet, setNames = GetContainerItemEquipmentSetInfo(bagID, slotID)
+			this.name = name
+			this.texture = texture
+			this.link = link
+			this.count = count
+			this.locked = locked
+			this.quality = itemQuality
+			this.readable = readable
+			this.lootable = lootable
 
-		this.equipmentSets = setNames
-		this.containerTypes = GetItemFamily(link)
-
+		end
 
 		this.lockChanged = function()
 
 			local xTexture, xCount, isLocked = GetContainerItemInfo(bagID, slotID)
-
 			this.locked = isLocked
 			
 		end
 
+		this.print = function()
+
+			local r, g, b, color = GetItemQualityColor(this.quality)
+
+			print(string.format("|c%s%s|r x%d", 
+								color,
+								this.name,
+								this.count))
+		end
+
 		return this
+		
 	end,
 
 }
