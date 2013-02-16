@@ -7,8 +7,8 @@
 
 initialise.lua
 
-itemModel.lua
-bagModel.lua
-containerModel.lua
+models\itemModel.lua
+models\bagModel.lua
+models\containerModel.lua
 
 run.lua
