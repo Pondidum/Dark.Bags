@@ -23,6 +23,8 @@ Constants
 
 NUM_BAG_SLOTS				0 -> NUM_BAG_SLOTS == player bags
 NUM_BANKBAGSLOTS			NUM_BAG_SLOTS + 1 -> NUM_BAG_SLOTS + NUM_BANKBAGSLOTS == bank bag
+
+
 Hmmm
 =============================
 

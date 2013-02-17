@@ -24,7 +24,11 @@ local containerModel = {
 		events.register("ITEM_LOCK_CHANGED", nil, function(self, event, bagID, slotID)
 
 			print("onItemLockChanged")
-			this.bags[bagID].lockChanged(slotID)
+			local bag = this.bags[bagID]
+
+			if bag then
+				bag.lockChanged(slotID)
+			end
 			
 		end)
 
