@@ -4,7 +4,7 @@ local model = ns.model
 local group = ns.group
 local views = ns.views
 
-local bagContainer = {
+views.bagContainer = {
 	
 	new = function(name, parent, bagStart, bagFinish)
 
@@ -33,5 +33,3 @@ local bagContainer = {
 	end
 
 }
-
-ns.views.bagContainer = bagContainer

@@ -3,7 +3,7 @@ local addon, ns = ...
 local model = ns.model
 local group = ns.group
 
-local bagGroup = {
+views.bagContainer = {
 	
 	new = function(name, parent, bagNumber)
 
