@@ -1,6 +1,6 @@
 ## Interface: 50001
 ## Title: Dark.Bags
-## Author: Darkend / Singularity / Zenedar / EU
+## Author: Darkend / Darkstorm / Zenedar / EU
 ## Version: 0.0.1
 ## Notes: Bags
 ## RequiredDeps: Dark.Core
