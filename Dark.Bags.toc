@@ -7,8 +7,10 @@
 
 initialise.lua
 
-models\itemModel.lua
-models\bagModel.lua
-models\containerModel.lua
+models\model.lua
+
+views\group.lua
+views\bagGroup.lua
+views\bagContainer.lua
 
 run.lua

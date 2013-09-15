@@ -1,4 +1,51 @@
 
+-- bagView
+--     group (bag)
+-- 		item
+-- 		item
+-- 		item
+-- 	group (bag)
+-- 		item
+
+
+-- categoryView
+-- 	group (consumables)
+-- 		item 
+-- 		item
+-- 		item
+-- 		item
+-- 	group (equipmentSets)
+-- 		group (set-1)
+-- 			item
+-- 			item
+-- 		group (set-2)
+-- 			item
+-- 			item
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Relevent Events
 ==============================
 
