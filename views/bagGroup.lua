@@ -4,7 +4,7 @@ local model = ns.model
 local group = ns.group
 local views = ns.views
 
-views.bagContainer = {
+views.bagGroup = {
 	
 	new = function(name, parent, bagNumber)
 
@@ -30,6 +30,4 @@ views.bagContainer = {
 
 	end
 
-}
-
-ns.views.bagGroup = bagGroup
+} 
