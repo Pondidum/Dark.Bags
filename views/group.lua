@@ -11,8 +11,8 @@ local group = {
 		local frame = CreateFrame("Frame", name, parent)
 		layout.init(frame, options)
 
-		style.addBackground(frame)
-		style.addShadow(frame)
+		-- style.addBackground(frame)
+		-- style.addShadow(frame)
 
 
 		local this = setmetatable({}, { __index = self })
@@ -31,7 +31,7 @@ local group = {
 
 	addItem = function(self) 
 
-		local item = cache.get()
+		local item = ns.bagItemCache.get()
 		local frame = self.frame
 
 		item:SetParent(frame)
