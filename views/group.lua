@@ -40,6 +40,15 @@ local group = {
 		return item
 
 	end,
+
+	add = function(self, subGroup)
+
+		local frame = self.frame
+
+		frame.add(subGroup.frame)
+
+	end,
+
 }
 
 ns.group = group
