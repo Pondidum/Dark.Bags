@@ -45,6 +45,8 @@ local model = {
 					readable = readable,
 					lootable = lootable,
 					link = link,
+					bag = bag,
+					slot = slot,
 				}
 
 				if existing == nil or hasChanged(existing, info) then
