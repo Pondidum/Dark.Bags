@@ -17,12 +17,12 @@ local model = {
 			for key, value in pairs(first) do
 				
 				if second[key] ~= value then
-					return false
+					return true
 				end
 
 			end
 
-			return true
+			return false
 			
 		end
 
@@ -48,11 +48,10 @@ local model = {
 				}
 
 				if existing == nil or hasChanged(existing, info) then
-					
-					storage[bag][slot] = info	
 					table.insert(changedSlots, slot)
-
-				end				
+				end	
+				
+				storage[bag][slot] = info				
 
 			end
 
