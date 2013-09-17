@@ -2,6 +2,7 @@ local addon, ns = ...
 
 local model = ns.model
 local group = ns.group
+local views = ns.views
 
 views.bagContainer = {
 	
