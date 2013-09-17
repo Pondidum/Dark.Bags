@@ -1,19 +1,26 @@
 local addon, ns = ...
 
-local model = ns.model
+local core = Dark.core
+local style = core.style
+
 local group = ns.group
 local views = ns.views
 
 views.bagContainer = {
 	
-	new = function(name, parent, bagStart, bagFinish)
+	new = function(name, parent, model, bagStart, bagFinish)
 
 		local this = group:new(name, parent)
 		local bags = {}
 
 		for bagID = bagStart, bagFinish do
 			
-			local sub = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
+			local sub = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, model, bagID)
+			sub.frame:SetPoint("LEFT")
+			sub.frame:SetPoint("RIGHT")
+	
+			style.addBackground(sub.frame)
+			style.addShadow(sub.frame)
 
 			this:add(sub)			
 			table.insert(bags, sub)

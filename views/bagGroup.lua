@@ -1,14 +1,13 @@
 local addon, ns = ...
 
-local model = ns.model
 local group = ns.group
 local views = ns.views
 
 views.bagGroup = {
 	
-	new = function(name, parent, bagNumber)
+	new = function(name, parent, model, bagNumber)
 
-		local this = group:new(name, parent)
+		local this = group:new(name, parent, { wrap = true, autosize = true })
 
 		this.populate = function()
 
