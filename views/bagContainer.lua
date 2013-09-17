@@ -10,7 +10,7 @@ views.bagContainer = {
 	
 	new = function(name, parent, model, bagStart, bagFinish)
 
-		local this = group:new(name, parent)
+		local this = group:new(name, parent, { wrap = true, autosize = true })
 		local bags = {}
 
 		for bagID = bagStart, bagFinish do
