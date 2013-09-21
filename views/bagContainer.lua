@@ -10,7 +10,13 @@ views.bagContainer = {
 	
 	new = function(name, parent, model, bagStart, bagFinish)
 
-		local this = group:new(name, parent, { wrap = true, autosize = true })
+		local layoutOptions = { 
+			wrap = true, 
+			marginBottom = 4, 
+			marginTop = 4
+		}
+
+		local this = group:new(name, parent, layoutOptions)
 		local bags = {}
 
 		for bagID = bagStart, bagFinish do
@@ -33,7 +39,10 @@ views.bagContainer = {
 				bags[i].populate()
 			end
 
+			this.frame.performLayout()
+			
 		end
+
 
 		return this
 
