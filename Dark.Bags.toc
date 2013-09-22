@@ -9,6 +9,7 @@ initialise.lua
 
 models\model.lua
 
+views\item.lua
 views\group.lua
 views\bagGroup.lua
 views\bagContainer.lua
