@@ -3,6 +3,7 @@ local addon, ns = ...
 local core = Dark.core
 
 local classifiers = {}
+local requestRescan
 
 ns.classifiers = {
     
@@ -13,27 +14,28 @@ ns.classifiers = {
 		this.events = core.events.new()
 		
 		this.addRescanEvent = function(self, event)
-			self.events.register(event, self:requestRescan)
+			self.events.register(event, requestRescan)
 		end
 
-		this.requestRescan = function(self) end
-		this.beforeClassify = function(self) end
-		this.classify = function(self, details) end
-		this.afterClassify = function(self) end
+		this.requestRescan = requestRescan
 
-		self:add(this)
+		this.beforeClassify = function() end
+		this.classify = function(details) end
+		this.afterClassify = function() end
+
+		self.add(this)
 
 		return this
 
 	end,
 
-	add = function(self, classifier)
+	add = function(classifier)
 
 		table.insert(classifiers, classifier)
 
 	end,
 
-	beforeClassify = function(self)
+	beforeClassify = function()
 
 		for i, c in ipairs(classifiers) do
 			c:beforeClassify()
@@ -41,7 +43,7 @@ ns.classifiers = {
 
 	end,
 
-	classify = function(self, detail)
+	classify = function(detail)
 	
 		for i, c in ipairs(classifier) do
 			c:classify(detail)
@@ -49,11 +51,16 @@ ns.classifiers = {
 
 	end,
 
-	afterClassify = function(self)
+	afterClassify = function()
 
 		for i, c in ipairs(classifiers) do
 			c:afterClassify()
 		end
 
-	end
+	end,
+
+	onRescanRequested = function(action)
+		requestRescan = action
+	end,
+
 }
