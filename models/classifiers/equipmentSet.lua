@@ -1,56 +1,46 @@
 local addon, ns = ...
 
-local core = Dark.core
-local events = core.eventStore.new()
+local setLocations = {}
 
-local TAG = "EQUIPMENTSET"
+ns.classifiers.new(function(this)
 
-local equipmentSet = {
-	
-	new = function()
+	this.addRescanEvent("EQUIPMENT_SETS_CHANGED")
 
-		local this = classifier:new()
-		this:addRescanEvent("EQUIPMENT_SETS_CHANGED")
+	this.beforeClassify = function()
 
-		local setLocations = {}
+		table.wipe(setLocations)
 
-		this.beforeClassify = function(self)
+		for i = 1, GetNumEquipmentSets() do
 
-			table.wipe(setLocations)
+			local setName, icon, setID = GetEquipmentSetInfo(i)
+			local items = GetEquipmentSetLocations(setName)
 
-			for i = 1, GetNumEquipmentSets() do
+			for k, v in pairs(items) do 
+					
+					local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
 
-				local setName, icon, setID = GetEquipmentSetInfo(i)
-				local items = GetEquipmentSetLocations(setName)
-
-				for k, v in pairs(items) do 
-  					
-  					local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
-
-  					setLocations[bag] = setLocations[bag] or {}
-  					setLocations[bag][slot] = setName
-
-				end
+					setLocations[bag] = setLocations[bag] or {}
+					setLocations[bag][slot] = setName
 
 			end
 
 		end
 
-		this.classify = function(self, details)
+	end
 
-			local set = setLocations[details.bag][details.slot]
+	this.classify = function(details)
 
-			if set then 
-				details.tags[TAG] = true
-				details.tags[TAG..":"..set] = true
-			end
+		local set = setLocations[details.bag][details.slot]
 
+		if set then 
+			details.tags["EQUIPMENTSET"] = true
+			details.tags["EQUIPMENTSET:"..set] = true
 		end
 
-		this.afterClassify = function(self)
-			table.wipe(setLocations)
-		end
+	end
 
-		return this
-	end,
-}
+	this.afterClassify = function()
+		table.wipe(setLocations)
+	end
+
+end)

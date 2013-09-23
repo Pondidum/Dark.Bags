@@ -7,14 +7,13 @@ local requestRescan
 
 ns.classifiers = {
     
-	new = function(self) 
+	new = function(buildAction) 
 
 		local this = {}
-
-		this.events = core.events.new()
+		local events = core.events.new()
 		
-		this.addRescanEvent = function(self, event)
-			self.events.register(event, requestRescan)
+		this.addRescanEvent = function(event)
+			events.register(event, requestRescan)
 		end
 
 		this.requestRescan = requestRescan
@@ -23,15 +22,9 @@ ns.classifiers = {
 		this.classify = function(details) end
 		this.afterClassify = function() end
 
-		self.add(this)
-
-		return this
-
-	end,
-
-	add = function(classifier)
-
 		table.insert(classifiers, classifier)
+
+		buildAction(this)
 
 	end,
 
