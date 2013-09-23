@@ -17,10 +17,10 @@ ns.classifiers.new(function(this)
 
 			for k, v in pairs(items) do 
 					
-					local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
+				local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
 
-					setLocations[bag] = setLocations[bag] or {}
-					setLocations[bag][slot] = setName
+				setLocations[bag] = setLocations[bag] or {}
+				setLocations[bag][slot] = setName
 
 			end
 
