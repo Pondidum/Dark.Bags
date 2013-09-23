@@ -26,60 +26,36 @@ local model = {
 			
 		end
 
-		local scanBag = function(bag)
-
-			storage[bag] = storage[bag] or {}
-
-			local changedSlots = {}
-
-			for slot = 1, GetContainerNumSlots(bag) do
-
-				local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
-				local existing = storage[bag][slot]
-
-				local info = {
-					texture = texture,
-					count = count,
-					locked = locked,
-					quality = quality,
-					readable = readable,
-					lootable = lootable,
-					link = link,
-					bag = bag,
-					slot = slot,
-				}
-
-				if existing == nil or hasChanged(existing, info) then
-					table.insert(changedSlots, slot)
-				end	
-				
-				storage[bag][slot] = info				
-
-			end
-
-			return changedSlots
-
-		end
-
-		local notify = function(changedSlots)
-
-			for i, listener in ipairs(listeners) do
-				listener(changedSlots)
-			end
-
-		end
-
 		local scan = function()
 
-			local changes = {}
-
 			for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
+				
+				storage[bag] = storage[bag] or {}
 
-				changes[bag] = scanBag(bag)
+				for slot = 1, GetContainerNumSlots(bag) do
+
+					local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
+					local info = storage[bag][slot] or {}
+
+					info.texture = texture
+					info.count = count
+					info.locked = locked
+					info.quality = quality
+					info.readable = readable
+					info.lootable = lootable
+					info.link = link
+					info.bag = bag
+					info.slot = slot
+
+					storage[bag][slot] = info				
+
+				end
 
 			end
-
-			notify(changes)
+			
+			for i, listener in ipairs(listeners) do
+				listener()
+			end
 
 		end
 
