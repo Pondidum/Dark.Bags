@@ -1,9 +1,12 @@
 local addon, ns = ...
+
 local core = Dark.core
 local events = core.events.new()
 
 local BACKPACK_CONTAINER = BACKPACK_CONTAINER
 local NUM_BAG_SLOTS = NUM_BAG_SLOTS
+
+local classifiers = ns.classifiers
 
 local model = {
 
@@ -28,6 +31,8 @@ local model = {
 
 		local scan = function()
 
+			classifiers.beforeClassify()
+
 			for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
 				
 				storage[bag] = storage[bag] or {}
@@ -47,11 +52,17 @@ local model = {
 					info.bag = bag
 					info.slot = slot
 
+					info.tags = info.tags or {}
+
+					classifiers.classify(info)
+
 					storage[bag][slot] = info				
 
 				end
 
 			end
+
+			classifiers.afterClassify()
 			
 			for i, listener in ipairs(listeners) do
 				listener()
@@ -60,6 +71,7 @@ local model = {
 		end
 
 		events.register("BAG_UPDATE_DELAYED", scan)
+		classifiers.onRescanRequested(scan)
 		
 		local this = {}
 
@@ -69,6 +81,26 @@ local model = {
 
 		this.getContents = function(bag)
 			return storage[bag] or {}	--i trust me to not modify the table by refrence...
+		end
+
+		this.getByTag = function(tag)
+
+			local results = {}
+
+			for bagID, contents in pairs(storage) do
+
+				for slotID, item in pairs(contents) do
+
+					if item.tags[tag] then
+						table.insert(results, item)
+					end
+
+				end
+
+			end
+
+			return results
+
 		end
 
 		return this 

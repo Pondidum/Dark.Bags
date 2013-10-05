@@ -7,6 +7,8 @@
 
 initialise.lua
 
+models\classifier.lua
+models\classifiers\equipmentSet.lua
 models\model.lua
 
 views\item.lua
