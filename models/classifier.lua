@@ -38,7 +38,7 @@ ns.classifiers = {
 
 	classify = function(detail)
 	
-		for i, c in ipairs(classifier) do
+		for i, c in ipairs(classifiers) do
 			c:classify(detail)
 		end
 
