@@ -22,7 +22,7 @@ ns.classifiers = {
 		this.classify = function(details) end
 		this.afterClassify = function() end
 
-		table.insert(classifiers, classifier)
+		table.insert(classifiers, this)
 
 		buildAction(this)
 
@@ -31,7 +31,7 @@ ns.classifiers = {
 	beforeClassify = function()
 
 		for i, c in ipairs(classifiers) do
-			c:beforeClassify()
+			c.beforeClassify()
 		end
 
 	end,
@@ -39,7 +39,7 @@ ns.classifiers = {
 	classify = function(detail)
 	
 		for i, c in ipairs(classifiers) do
-			c:classify(detail)
+			c.classify(detail)
 		end
 
 	end,
@@ -47,7 +47,7 @@ ns.classifiers = {
 	afterClassify = function()
 
 		for i, c in ipairs(classifiers) do
-			c:afterClassify()
+			c.afterClassify()
 		end
 
 	end,

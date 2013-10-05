@@ -19,8 +19,12 @@ ns.classifiers.new(function(this)
 					
 				local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
 
-				setLocations[bag] = setLocations[bag] or {}
-				setLocations[bag][slot] = setName
+				if bag then
+					local key = bag ..":".. slot
+					
+					setLocations[key] = setLocations[key] or {}
+					setLocations[key][setName] = true
+				end
 
 			end
 
@@ -29,12 +33,27 @@ ns.classifiers.new(function(this)
 	end
 
 	this.classify = function(details)
+ 
+ 		local location = setLocations[details.bag ..":".. details.slot]
 
-		local set = setLocations[details.bag][details.slot]
+		if location then 
 
-		if set then 
 			details.tags["EQUIPMENTSET"] = true
-			details.tags["EQUIPMENTSET:"..set] = true
+
+			for key, value in pairs(location) do
+				details.tags["EQUIPMENTSET:"..key] = true
+			end
+
+		else
+
+			for key, v in pairs(details.tags) do
+				
+				if key:match("^EQUIPMENTSET:") then
+					details.tags[v]	= nil
+				end
+
+			end
+			
 		end
 
 	end

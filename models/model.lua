@@ -83,6 +83,26 @@ local model = {
 			return storage[bag] or {}	--i trust me to not modify the table by refrence...
 		end
 
+		this.getByTag = function(tag)
+
+			local results = {}
+
+			for bagID, contents in pairs(storage) do
+
+				for slotID, item in pairs(contents) do
+
+					if item.tags[tag] then
+						table.insert(results, item)
+					end
+
+				end
+
+			end
+
+			return results
+
+		end
+
 		return this 
 
 	end,
