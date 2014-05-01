@@ -4,7 +4,7 @@ local group = ns.group
 local views = ns.views
 
 views.bagGroup = {
-	
+
 	new = function(name, parent, model, bagNumber)
 
 		local this = group:new(name, parent, { wrap = true, autosize = true })
@@ -14,11 +14,12 @@ views.bagGroup = {
 			this:clear()
 
 			local contents = model.getContents(bagNumber)
+			this.frame:SetID(bagNumber)
 
 			for k, details in pairs(contents) do
-				
+
 				local item = this:addItem()
-				
+
 				item.populate(details)
 
 			end
@@ -29,4 +30,4 @@ views.bagGroup = {
 
 	end
 
-} 
+}
