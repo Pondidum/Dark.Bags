@@ -5,7 +5,7 @@ local layout = core.layout
 local style = core.style
 
 local group = {
-	
+
 	new = function(self, name, parent, options)
 
 		local frame = CreateFrame("Frame", name, parent)
@@ -19,17 +19,17 @@ local group = {
 
 		this.frame = frame
 
-		return this 
+		return this
 
-	end, 
+	end,
 
-	clear = function(self) 
+	clear = function(self)
 
 		self.frame.clear()
 
 	end,
 
-	addItem = function(self) 
+	addItem = function(self)
 
 		local item = ns.bagItemCache.get()
 		local frame = self.frame

@@ -6,12 +6,12 @@ local classifiers = {}
 local requestRescan
 
 ns.classifiers = {
-    
-	new = function(buildAction) 
+
+	new = function(buildAction)
 
 		local this = {}
 		local events = core.events.new()
-		
+
 		this.addRescanEvent = function(event)
 			events.register(event, requestRescan)
 		end
@@ -37,7 +37,7 @@ ns.classifiers = {
 	end,
 
 	classify = function(detail)
-	
+
 		for i, c in ipairs(classifiers) do
 			c.classify(detail)
 		end

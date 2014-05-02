@@ -15,13 +15,13 @@ ns.classifiers.new(function(this)
 			local setName, icon, setID = GetEquipmentSetInfo(i)
 			local items = GetEquipmentSetLocations(setName)
 
-			for k, v in pairs(items) do 
-					
+			for k, v in pairs(items) do
+
 				local player, bank, bags, location, slot, bag = EquipmentManager_UnpackLocation(v)
 
 				if bag then
 					local key = bag ..":".. slot
-					
+
 					setLocations[key] = setLocations[key] or {}
 					setLocations[key][setName] = true
 				end
@@ -33,10 +33,10 @@ ns.classifiers.new(function(this)
 	end
 
 	this.classify = function(details)
- 
+
  		local location = setLocations[details.bag ..":".. details.slot]
 
-		if location then 
+		if location then
 
 			details.tags["EQUIPMENTSET"] = true
 
@@ -47,13 +47,13 @@ ns.classifiers.new(function(this)
 		else
 
 			for key, v in pairs(details.tags) do
-				
+
 				if key:match("^EQUIPMENTSET:") then
 					details.tags[v]	= nil
 				end
 
 			end
-			
+
 		end
 
 	end

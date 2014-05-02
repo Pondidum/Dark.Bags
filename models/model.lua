@@ -18,7 +18,7 @@ local model = {
 		local hasChanged = function(first, second)
 
 			for key, value in pairs(first) do
-				
+
 				if second[key] ~= value then
 					return true
 				end
@@ -26,7 +26,7 @@ local model = {
 			end
 
 			return false
-			
+
 		end
 
 		local scan = function()
@@ -34,7 +34,7 @@ local model = {
 			classifiers.beforeClassify()
 
 			for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
-				
+
 				storage[bag] = storage[bag] or {}
 
 				for slot = 1, GetContainerNumSlots(bag) do
@@ -56,14 +56,14 @@ local model = {
 
 					classifiers.classify(info)
 
-					storage[bag][slot] = info				
+					storage[bag][slot] = info
 
 				end
 
 			end
 
 			classifiers.afterClassify()
-			
+
 			for i, listener in ipairs(listeners) do
 				listener()
 			end
@@ -72,7 +72,7 @@ local model = {
 
 		events.register("BAG_UPDATE_DELAYED", scan)
 		classifiers.onRescanRequested(scan)
-		
+
 		local this = {}
 
 		this.addListener = function(listener)
@@ -103,7 +103,7 @@ local model = {
 
 		end
 
-		return this 
+		return this
 
 	end,
 }

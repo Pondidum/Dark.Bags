@@ -10,7 +10,7 @@
 
 -- categoryView
 -- 	group (consumables)
--- 		item 
+-- 		item
 -- 		item
 -- 		item
 -- 		item
@@ -81,11 +81,11 @@ BagUpdateDelayed => Range(1, BAGS).SelectMany(bag => Range(1, GetBagSize(bag)).S
 local items = {}
 
 for bag = 0, NUM_BAG_SLOTS do
-	
+
 	for slot = 1, GetContainerNumSlots(bag) do
 
 		table.insert(items, itemModel.new(bag, slot))
-		
+
 	end
 
 end
