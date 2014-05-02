@@ -8,6 +8,8 @@ ns.views.item = {
 	new = function(name)
 
 		local this = CreateFrame("CheckButton", name, nil, "ContainerFrameItemButtonTemplate")
+		local count = this.count
+		local icon = this.icon
 
 		this:SetPushedTexture("")
 		this:SetNormalTexture("")
@@ -18,15 +20,26 @@ ns.views.item = {
 
 		style.addShadow(this)
 
-		local icon = this.icon
+		this:Show()
+
+		count:ClearAllPoints()
+		count:SetPoint("BottomRight")
+		count:Show()
+
 		icon:SetAllPoints(this)
 		icon:SetTexCoord(.08, .92, .08, .92)
 
 		this.populate = function(details)
 			icon:SetTexture(details.texture)
 
+			if details.count and details.count > 1 then
+				count:SetText(details.count)
+			else
+				count:SetText("")
+			end
+
 			this:SetID(details.slot)
-			this:Show()
+
 		end
 
 		return this
