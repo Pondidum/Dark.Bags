@@ -75,7 +75,7 @@ local model = {
 
 		local this = {}
 
-		this.addListener = function(listener)
+		this.addUpdateListener = function(listener)
 			table.insert(listeners, listener)
 		end
 
