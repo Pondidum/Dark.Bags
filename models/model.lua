@@ -29,6 +29,24 @@ local model = {
 
 		end
 
+		local updateItem = function(info, bag, slot)
+
+			local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
+
+			info.texture = texture
+			info.count = count
+			info.locked = locked
+			info.quality = quality
+			info.readable = readable
+			info.lootable = lootable
+			info.link = link
+			info.bag = bag
+			info.slot = slot
+
+			info.tags = info.tags or {}
+
+		end
+
 		local scan = function()
 
 			classifiers.beforeClassify()
@@ -39,23 +57,11 @@ local model = {
 
 				for slot = 1, GetContainerNumSlots(bag) do
 
-					local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
 					local info = storage[bag][slot] or {}
 
-					info.texture = texture
-					info.count = count
-					info.locked = locked
-					info.quality = quality
-					info.readable = readable
-					info.lootable = lootable
-					info.link = link
-					info.bag = bag
-					info.slot = slot
-
-					info.tags = info.tags or {}
-
+					updateItem(info, bag, slot)
 					classifiers.classify(info)
-
+					
 					storage[bag][slot] = info
 
 				end
