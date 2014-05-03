@@ -7,6 +7,7 @@ local BACKPACK_CONTAINER = BACKPACK_CONTAINER
 local NUM_BAG_SLOTS = NUM_BAG_SLOTS
 
 local classifiers = ns.classifiers
+local itemModel = ns.itemModel
 
 local model = {
 
@@ -29,24 +30,6 @@ local model = {
 
 		end
 
-		local updateItem = function(info, bag, slot)
-
-			local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
-
-			info.texture = texture
-			info.count = count
-			info.locked = locked
-			info.quality = quality
-			info.readable = readable
-			info.lootable = lootable
-			info.link = link
-			info.bag = bag
-			info.slot = slot
-
-			info.tags = info.tags or {}
-
-		end
-
 		local scan = function()
 
 			classifiers.beforeClassify()
@@ -57,11 +40,12 @@ local model = {
 
 				for slot = 1, GetContainerNumSlots(bag) do
 
-					local info = storage[bag][slot] or {}
+					local info = storage[bag][slot] or itemModel:new(bag, slot)
 
-					updateItem(info, bag, slot)
+					info:update()
+
 					classifiers.classify(info)
-					
+
 					storage[bag][slot] = info
 
 				end
