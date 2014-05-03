@@ -16,20 +16,6 @@ local model = {
 		local this = {}
 		local storage = {}
 
-		local hasChanged = function(first, second)
-
-			for key, value in pairs(first) do
-
-				if second[key] ~= value then
-					return true
-				end
-
-			end
-
-			return false
-
-		end
-
 		local scan = function()
 
 			classifiers.beforeClassify()
