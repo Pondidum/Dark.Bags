@@ -29,8 +29,7 @@ local model = {
 					local info = storage[bag][slot] or itemModel:new(bag, slot)
 
 					info:update()
-
-					classifiers.classify(info)
+					info:classify(classifiers)
 
 					storage[bag][slot] = info
 

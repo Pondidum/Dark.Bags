@@ -23,9 +23,15 @@ local itemModel = {
 		self.lootable = lootable
 		self.link = link
 
-		self.tags = self.tags or {}
-
 	end,
+
+	classify = function(self, classifiers)
+
+		self.tags = self.tags or {}
+		classifiers.classify(self)
+	end,
+
 }
+
 
 ns.itemModel = itemModel
