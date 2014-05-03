@@ -30,11 +30,10 @@ local run = function()
 	view.frame:SetPoint("RIGHT")
 	view.frame:SetPoint("TOP")
 
-	model.addUpdateListener(function()
-		print("listener triggered")
+	model.onContentsChanged = function()
 		cache.recycleAll()
 		view.populate()
-	end)
+	end
 
 end
 

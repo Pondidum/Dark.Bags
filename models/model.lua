@@ -12,8 +12,8 @@ local model = {
 
 	new = function()
 
+		local this = {}
 		local storage = {}
-		local listeners = {}
 
 		local hasChanged = function(first, second)
 
@@ -64,19 +64,14 @@ local model = {
 
 			classifiers.afterClassify()
 
-			for i, listener in ipairs(listeners) do
-				listener()
-			end
+			this.onContentsChanged()
 
 		end
 
 		events.register("BAG_UPDATE_DELAYED", scan)
 		classifiers.onRescanRequested(scan)
 
-		local this = {}
-
-		this.addUpdateListener = function(listener)
-			table.insert(listeners, listener)
+		this.onContentsChanged = function()
 		end
 
 		this.getContents = function(bag)
