@@ -14,6 +14,7 @@ local itemModel = {
 	update = function(self)
 
 		local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(self.bag, self.slot)
+		local start, duration, enable = GetContainerItemCooldown(self.bag, self.slot)
 
 		self.texture = texture
 		self.count = count
@@ -22,6 +23,10 @@ local itemModel = {
 		self.readable = readable
 		self.lootable = lootable
 		self.link = link
+
+		self.cooldownStart = start
+		self.cooldownDuration = duration
+		self.cooldownFinish = start + duration
 
 	end,
 
