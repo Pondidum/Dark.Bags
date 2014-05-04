@@ -17,4 +17,6 @@ views\group.lua
 views\bagGroup.lua
 views\bagContainer.lua
 
+controllers\uiIntegrationController.lua
+
 run.lua

@@ -2,6 +2,7 @@ local addon, ns = ...
 
 local core = Dark.core
 local layout = core.layout
+local events = core.events.new()
 local style = core.style
 
 
@@ -37,6 +38,14 @@ local run = function()
 	model.onCooldownsUpdated = function()
 		view.update()
 	end
+
+	local ui = ns.controllers.uiIntegration.new(rootContainer)
+
+	events.register("PLAYER_ENTERING_WORLD", function()
+		events.unregister("PLAYER_ENTERING_WORLD")
+		ui.hook()
+	end)
+
 
 end
 
