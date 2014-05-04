@@ -35,6 +35,10 @@ local run = function()
 		view.populate()
 	end
 
+	model.onCooldownsUpdated = function()
+		view.update()
+	end
+
 end
 
 run()
