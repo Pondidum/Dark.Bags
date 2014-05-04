@@ -22,11 +22,10 @@ local run = function()
 
 	local rootContainer = CreateFrame("Frame", "DarkBags", UIParent)
 
-	rootContainer:SetPoint("RIGHT", MultiBarRight, "LEFT", -50, 0)
-	rootContainer:SetSize(400, 400)
+	rootContainer:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
+	rootContainer:SetSize(394, 400)
 
 	local view = views.bagContainer.new("DarkBagsBackpack", rootContainer, model, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
-	view.frame:SetPoint("LEFT")
 	view.frame:SetPoint("RIGHT")
 	view.frame:SetPoint("TOP")
 
