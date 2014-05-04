@@ -49,6 +49,12 @@ ns.views.item = {
 
 			CooldownFrame_SetTimer(cooldown, details.cooldownStart, details.cooldownDuration, 1, 0, 0)
 
+			if details.quality and details.quality > ITEM_QUALITY_COMMON then
+				this.shadow:SetBackdropBorderColor(unpack(details.qualityColor))
+			else
+				this.shadow:SetBackdropBorderColor(unpack(core.colors.shadow))
+			end
+
 		end
 
 		return this
