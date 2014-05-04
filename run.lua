@@ -9,7 +9,7 @@ end
 
 local run = function()
 
-	local model = ns.model.new()
+	local model = ns.model.new(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 
 	local cache = core.cache.new(createBagItem)
 	ns.bagItemCache = cache

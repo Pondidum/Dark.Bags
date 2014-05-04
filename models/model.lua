@@ -3,15 +3,12 @@ local addon, ns = ...
 local core = Dark.core
 local events = core.events.new()
 
-local BACKPACK_CONTAINER = BACKPACK_CONTAINER
-local NUM_BAG_SLOTS = NUM_BAG_SLOTS
-
 local classifiers = ns.classifiers
 local itemModel = ns.itemModel
 
 local model = {
 
-	new = function()
+	new = function(startRange, finishRange)
 
 		local this = {}
 		local storage = {}
@@ -35,7 +32,7 @@ local model = {
 
 			classifiers.beforeClassify()
 
-			for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
+			for bag = startRange, finishRange do
 
 				storage[bag] = storage[bag] or {}
 
