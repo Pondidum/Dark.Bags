@@ -50,6 +50,11 @@ local uiIntegration = {
 			OpenBackpack = originalOpenBackpack
 			CloseAllBags = originalCloseAllBags
 			CloseBackpack = originalCloseBackpack
+
+			ToggleBackpack = originalToggleBackpack
+			ToggleBag = originalToggleBag
+			ToggleAllBags = originalToggleAllBags
+
 		end
 
 		local this = {}
