@@ -16,7 +16,22 @@ local model = {
 		local this = {}
 		local storage = {}
 
-		local scan = function()
+		local quickScan = function()
+
+			classifiers.beforeClassify()
+
+				for bagID, slots in pairs(storage) do
+					for slotID, contents in pairs(slots) do
+						contents:update()
+						contents:classify(classifiers)
+					end
+				end
+
+			classifiers.afterClassify()
+
+		end
+
+		local fullRescan = function()
 
 			classifiers.beforeClassify()
 
@@ -43,10 +58,19 @@ local model = {
 
 		end
 
-		events.register("BAG_UPDATE_DELAYED", scan)
-		classifiers.onRescanRequested(scan)
+		local onCooldownsUpdated = function()
+			quickScan()
+			this.onCooldownsUpdated()
+		end
+
+		events.register("BAG_UPDATE_DELAYED", fullRescan)
+		events.register("BAG_UPDATE_COOLDOWN", onCooldownsUpdated)
+		--classifiers.onRescanRequested(fullRescan)
 
 		this.onContentsChanged = function()
+		end
+
+		this.onCooldownsUpdated = function()
 		end
 
 		this.getContents = function(bag)
