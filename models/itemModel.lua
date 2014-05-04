@@ -17,6 +17,12 @@ local itemModel = {
 
 		local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(self.bag, self.slot)
 		local start, duration, enable = GetContainerItemCooldown(self.bag, self.slot)
+
+		--GetContainerItemInfo does not return a quality value for all items.  If it does not, it returns -1
+		if link and quality < 0 then
+			quality = select(3, GetItemInfo(link))
+		end
+
 		local r, g, b = GetItemQualityColor(quality or ITEM_QUALITY_COMMON)
 
 		self.texture = texture
