@@ -43,6 +43,14 @@ views.bagContainer = {
 
 		end
 
+		this.update = function()
+
+			for i = 1, #bags do
+				bags[i].update()
+			end
+
+		end
+
 
 		return this
 
