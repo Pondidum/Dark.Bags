@@ -10,6 +10,7 @@ ns.views.item = {
 		local this = CreateFrame("CheckButton", name, nil, "ContainerFrameItemButtonTemplate")
 		local count = this.count
 		local icon = this.icon
+		local cooldown = _G[this:GetName() .."Cooldown"]
 
 		this:SetPushedTexture("")
 		this:SetNormalTexture("")
@@ -29,7 +30,13 @@ ns.views.item = {
 		icon:SetAllPoints(this)
 		icon:SetTexCoord(.08, .92, .08, .92)
 
-		this.populate = function(details)
+		local details
+
+		this.setDetails = function(info)
+			details = info
+		end
+
+		this.populate = function()
 			icon:SetTexture(details.texture)
 
 			if details.count and details.count > 1 then
@@ -39,6 +46,8 @@ ns.views.item = {
 			end
 
 			this:SetID(details.slot)
+
+			CooldownFrame_SetTimer(cooldown, details.cooldownStart, details.cooldownDuration, 1, 0, 0)
 
 		end
 
