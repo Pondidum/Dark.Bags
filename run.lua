@@ -1,12 +1,6 @@
 local addon, ns = ...
 
 local core = Dark.core
-local layout = core.layout
-local events = core.events.new()
-local style = core.style
-
-
-local group = ns.group
 local views = ns.views
 
 local createBagItem = function(i)
@@ -16,7 +10,6 @@ end
 local run = function()
 
 	local model = ns.model.new()
-	ns.bagModel = model
 
 	local cache = core.cache.new(createBagItem)
 	ns.bagItemCache = cache
@@ -40,12 +33,7 @@ local run = function()
 	end
 
 	local ui = ns.controllers.uiIntegration.new(rootContainer)
-
-	events.register("PLAYER_ENTERING_WORLD", function()
-		events.unregister("PLAYER_ENTERING_WORLD")
-		ui.hook()
-	end)
-
+	 ui.hook()
 
 end
 
