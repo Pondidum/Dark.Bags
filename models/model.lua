@@ -62,6 +62,8 @@ local model = {
 
 		events.register("BAG_UPDATE_DELAYED", fullRescan)
 		events.register("BAG_UPDATE_COOLDOWN", onCooldownsUpdated)
+		events.register("ITEM_LOCK_CHANGED", onCooldownsUpdated)
+
 		--classifiers.onRescanRequested(fullRescan)
 
 		this.onContentsChanged = function()
