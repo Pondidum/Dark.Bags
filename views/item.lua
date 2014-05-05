@@ -55,6 +55,8 @@ ns.views.item = {
 				this.shadow:SetBackdropBorderColor(unpack(core.colors.shadow))
 			end
 
+			icon:SetDesaturated(details.locked)
+
 		end
 
 		return this
