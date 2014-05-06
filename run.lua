@@ -33,8 +33,9 @@ local run = function()
 	end
 
 	local ui = ns.controllers.uiIntegration.new(rootContainer)
-	 ui.hook()
+	ui.hook()
 
+	local gold = ns.goldDisplay.new()
 end
 
 run()

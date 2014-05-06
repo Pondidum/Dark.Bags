@@ -16,7 +16,9 @@ views\item.lua
 views\group.lua
 views\bagGroup.lua
 views\bagContainer.lua
+views\goldDisplay.lua
 
 controllers\uiIntegrationController.lua
+
 
 run.lua
