@@ -14,14 +14,9 @@ local run = function()
 	local cache = core.cache.new(createBagItem)
 	ns.bagItemCache = cache
 
-	local rootContainer = CreateFrame("Frame", "DarkBags", UIParent)
-
-	rootContainer:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
-	rootContainer:SetSize(394, 400)
-
-	local view = views.bagContainer.new("DarkBagsBackpack", rootContainer, model, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
-	view.frame:SetPoint("RIGHT")
-	view.frame:SetPoint("TOP")
+	local view = views.bagContainer.new("DarkBagsBackpack", UIParent, model, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
+	view.frame:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
+	view.frame:SetSize(450, 200)
 
 	model.onContentsChanged = function()
 		cache.recycleAll()
@@ -32,7 +27,7 @@ local run = function()
 		view.update()
 	end
 
-	local ui = ns.controllers.uiIntegration.new(rootContainer)
+	local ui = ns.controllers.uiIntegration.new(view.frame)
 	ui.hook()
 
 	local gold = ns.goldDisplay.new()
