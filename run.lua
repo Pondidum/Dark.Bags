@@ -7,12 +7,18 @@ local createBagItem = function(i)
 	return views.item.new("DarkBagItem"..i)
 end
 
+local backpack = function()
+
+end
+
 local run = function()
 
-	local model = ns.model.new(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
+
 
 	local cache = core.cache.new(createBagItem)
 	ns.bagItemCache = cache
+
+	local model = ns.model.new(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 
 	local view = views.bagContainer.new("DarkBagsBackpack", UIParent, model, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 	view.frame:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)

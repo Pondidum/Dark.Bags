@@ -5,17 +5,16 @@ local views = ns.views
 
 views.bagGroup = {
 
-	new = function(name, parent, model, bagNumber)
+	new = function(name, parent, bagNumber)
 
 		local this = group:new(name, parent, { wrap = true, autosize = true })
 		local entries = {}
 
-		this.populate = function()
+		this.populate = function(contents)
 
 			this:clear()
 			table.wipe(entries)
 
-			local contents = model.getContents(bagNumber)
 			this.frame:SetID(bagNumber)
 
 			for k, details in pairs(contents) do

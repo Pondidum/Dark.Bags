@@ -21,22 +21,26 @@ views.bagContainer = {
 
 		for bagID = bagStart, bagFinish do
 
-			local sub = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, model, bagID)
-			sub.frame:SetPoint("LEFT")
-			sub.frame:SetPoint("RIGHT")
+			local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
+			group.frame:SetPoint("LEFT")
+			group.frame:SetPoint("RIGHT")
 
-			style.addBackground(sub.frame)
-			style.addShadow(sub.frame)
+			style.addBackground(group.frame)
+			style.addShadow(group.frame)
 
-			this:add(sub)
-			table.insert(bags, sub)
+			this:add(group)
+			bags[bagID] = group
 
 		end
 
 		this.populate = function()
 
-			for i = 1, #bags do
-				bags[i].populate()
+			for bagID, group in pairs(bags) do
+
+				local contents = model.getContents(bagID)
+
+				group.populate(contents)
+
 			end
 
 			this.frame.performLayout()
@@ -45,8 +49,8 @@ views.bagContainer = {
 
 		this.update = function()
 
-			for i = 1, #bags do
-				bags[i].update()
+			for bagID, group in pairs(bags) do
+				group.update()
 			end
 
 		end

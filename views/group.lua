@@ -11,10 +11,6 @@ local group = {
 		local frame = CreateFrame("Frame", name, parent)
 		layout.init(frame, options)
 
-		-- style.addBackground(frame)
-		-- style.addShadow(frame)
-
-
 		local this = setmetatable({}, { __index = self })
 
 		this.frame = frame
