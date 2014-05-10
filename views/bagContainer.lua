@@ -17,11 +17,11 @@ views.bagContainer = {
 		}
 
 		local this = group:new(name, parent, layoutOptions)
-		local bags = {}
+		local groups = {}
 
 		local buildOrGetGroup = function(bagID)
 
-			if not bags[bagID] then
+			if not groups[bagID] then
 
 				local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
 				group.frame:SetPoint("LEFT")
@@ -31,10 +31,10 @@ views.bagContainer = {
 				style.addShadow(group.frame)
 
 				this:add(group)
-				bags[bagID] = group
+				groups[bagID] = group
 			end
 
-			return bags[bagID]
+			return groups[bagID]
 
 		end
 
@@ -52,7 +52,7 @@ views.bagContainer = {
 
 		this.update = function()
 
-			for bagID, group in pairs(bags) do
+			for bagID, group in pairs(groups) do
 				group.update()
 			end
 
