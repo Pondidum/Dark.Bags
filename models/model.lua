@@ -1,7 +1,6 @@
 local addon, ns = ...
 
 local core = Dark.core
-local events = core.events.new()
 
 local classifiers = ns.classifiers
 local itemModel = ns.itemModel
@@ -10,6 +9,7 @@ local model = {
 
 	new = function(startRange, finishRange)
 
+		local events = core.events.new()
 		local this = {}
 		local storage = {}
 
