@@ -72,8 +72,8 @@ local model = {
 		this.onCooldownsUpdated = function()
 		end
 
-		this.getContents = function(bag)
-			return storage[bag] or {}	--i trust me to not modify the table by refrence...
+		this.getContents = function()
+			return storage --i trust me to not modify the table by refrence...
 		end
 
 		this.getByTag = function(tag)

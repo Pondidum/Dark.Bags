@@ -8,7 +8,7 @@ local views = ns.views
 
 views.bagContainer = {
 
-	new = function(name, parent, bagStart, bagFinish)
+	new = function(name, parent)
 
 		local layoutOptions = {
 			wrap = true,
@@ -19,27 +19,30 @@ views.bagContainer = {
 		local this = group:new(name, parent, layoutOptions)
 		local bags = {}
 
-		for bagID = bagStart, bagFinish do
+		local buildOrGetGroup = function(bagID)
 
-			local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
-			group.frame:SetPoint("LEFT")
-			group.frame:SetPoint("RIGHT")
+			if not bags[bagID] then
 
-			style.addBackground(group.frame)
-			style.addShadow(group.frame)
+				local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
+				group.frame:SetPoint("LEFT")
+				group.frame:SetPoint("RIGHT")
 
-			this:add(group)
-			bags[bagID] = group
+				style.addBackground(group.frame)
+				style.addShadow(group.frame)
+
+				this:add(group)
+				bags[bagID] = group
+			end
+
+			return bags[bagID]
 
 		end
 
 		this.populate = function(model)
 
-			for bagID, group in pairs(bags) do
+			for bagID, contents in pairs(model) do
 
-				local contents = model.getContents(bagID)
-
-				group.populate(contents)
+				buildOrGetGroup(bagID).populate(contents)
 
 			end
 
