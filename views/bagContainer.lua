@@ -8,7 +8,7 @@ local views = ns.views
 
 views.bagContainer = {
 
-	new = function(name, parent, model, bagStart, bagFinish)
+	new = function(name, parent, bagStart, bagFinish)
 
 		local layoutOptions = {
 			wrap = true,
@@ -33,7 +33,7 @@ views.bagContainer = {
 
 		end
 
-		this.populate = function()
+		this.populate = function(model)
 
 			for bagID, group in pairs(bags) do
 

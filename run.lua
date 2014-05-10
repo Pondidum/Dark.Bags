@@ -20,13 +20,13 @@ local run = function()
 
 	local model = ns.model.new(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 
-	local view = views.bagContainer.new("DarkBagsBackpack", UIParent, model, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
+	local view = views.bagContainer.new("DarkBagsBackpack", UIParent, BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 	view.frame:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
 	view.frame:SetSize(450, 200)
 
 	model.onContentsChanged = function()
 		cache.recycleAll()
-		view.populate()
+		view.populate(model)
 	end
 
 	model.onCooldownsUpdated = function()
