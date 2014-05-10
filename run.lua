@@ -7,16 +7,7 @@ local createBagItem = function(i)
 	return views.item.new("DarkBagItem"..i)
 end
 
-local backpack = function()
-
-end
-
-local run = function()
-
-
-
-	local cache = core.cache.new(createBagItem)
-	ns.bagItemCache = cache
+local buildBackpack = function()
 
 	local model = ns.model.new(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 
@@ -26,7 +17,7 @@ local run = function()
 	view.frame:SetSize(450, 200)
 
 	model.onContentsChanged = function()
-		cache.recycleAll()
+		ns.bagItemCache.recycleAll()
 		view.populate(model.getContents())
 	end
 
@@ -34,7 +25,18 @@ local run = function()
 		view.update()
 	end
 
-	local ui = ns.controllers.uiIntegration.new(view.frame)
+	return view.frame
+
+end
+
+local run = function()
+
+	local cache = core.cache.new(createBagItem)
+	ns.bagItemCache = cache
+
+	local pack = buildBackpack()
+
+	local ui = ns.controllers.uiIntegration.new(pack)
 	ui.hook()
 
 	local gold = ns.goldDisplay.new()
