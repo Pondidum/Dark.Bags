@@ -73,7 +73,20 @@ local model = {
 		end
 
 		this.getContents = function()
-			return storage --i trust me to not modify the table by refrence...
+
+			local current = startRange - 1
+
+			return function()
+
+				current = current + 1
+
+				if not storage[current] then
+					return nil
+				end
+
+				return current, storage[current] --i trust me to not modify the table by refrence...
+			end
+
 		end
 
 		this.getByTag = function(tag)

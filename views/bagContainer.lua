@@ -40,7 +40,7 @@ views.bagContainer = {
 
 		this.populate = function(model)
 
-			for bagID, contents in pairs(model) do
+			for bagID, contents in model do
 
 				buildOrGetGroup(bagID).populate(contents)
 
