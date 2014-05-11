@@ -61,6 +61,7 @@ local model = {
 		end
 
 		events.register("BAG_UPDATE_DELAYED", fullRescan)
+		events.register("BANKFRAME_OPENED", fullRescan)
 		events.register("BAG_UPDATE_COOLDOWN", onCooldownsUpdated)
 		events.register("ITEM_LOCK_CHANGED", onCooldownsUpdated)
 
