@@ -1,8 +1,11 @@
 local addon, ns = ...
 
+local core = Dark.core
+local events = core.events.new()
+
 local uiIntegration = {
 	
-	new = function(container)
+	new = function(bagContainer, bankContainer)
 
 		local originalToggleBackpack = ToggleBackpack
 		local originalToggleBag = ToggleBag
@@ -13,38 +16,58 @@ local uiIntegration = {
 		local originalCloseAllBags = CloseAllBags
 		local originalCloseBackpack = CloseBackpack
 
-		local show = function()
-			container:Show()
+		local showBag = function()
+			bagContainer:Show()
 		end
 
-		local hide = function()
-			container:Hide()
+		local hideBag = function()
+			bagContainer:Hide()
 		end
 
-		local toggle = function()
-			if container:IsShown() then
-				container:Hide()
+		local toggleBag = function()
+			if bagContainer:IsShown() then
+				bagContainer:Hide()
 			else
-				container:Show()
+				bagContainer:Show()
+			end
+		end
+
+		local showBank = function()
+			bankContainer:Show()
+		end
+
+		local hideBank = function()
+			CloseBankFrame()
+
+			if bankContainer:IsShown() then
+				bankContainer:Hide()
 			end
 		end
 
 		local hook = function()
-			tinsert(UISpecialFrames, container:GetName())
+			tinsert(UISpecialFrames, bagContainer:GetName())
+			tinsert(UISpecialFrames, bankContainer:GetName())
 
-			OpenAllBags = show
-			OpenBackpack = show
-			CloseAllBags = hide
-			CloseBackpack = hide
+			OpenAllBags = showBag
+			OpenBackpack = showBag
+			CloseAllBags = hideBag
+			CloseBackpack = hideBag
 
-			ToggleBackpack = toggle
-			ToggleBag = toggle
-			ToggleAllBags = toggle
+			ToggleBackpack = toggleBag
+			--ToggleBag = toggleBag
+			ToggleAllBags = toggleBag
+
+			BankFrame:UnregisterAllEvents()
+
+			events.register("BANKFRAME_OPENED", showBank)
+			events.register("BANKFRAME_CLOSED", function() bankContainer:Hide() end)
+			bankContainer:SetScript("OnHide", hideBank)
 
 		end
 
 		local unhook = function()
-			tremove(UISpecialFrames, container:GetName())
+			tremove(UISpecialFrames, bagContainer:GetName())
+			tinsert(UISpecialFrames, bankContainer:GetName())
 
 			OpenAllBags = originalOpenAllBags
 			OpenBackpack = originalOpenBackpack
@@ -55,6 +78,12 @@ local uiIntegration = {
 			ToggleBag = originalToggleBag
 			ToggleAllBags = originalToggleAllBags
 
+			BankFrame:RegisterEvent("BANKFRAME_OPENED")
+			BankFrame:RegisterEvent("BANKFRAME_CLOSED")
+
+			events.unregister("BANKFRAME_OPENED")
+			events.unregister("BANKFRAME_CLOSED")
+			bankContainer:SetScript("OnHide", nil)
 		end
 
 		local this = {}

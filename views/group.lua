@@ -25,23 +25,11 @@ local group = {
 
 	end,
 
-	addItem = function(self)
-
-		local item = ns.bagItemCache.get()
-		local frame = self.frame
-
-		item:SetParent(frame)
-		frame.add(item)
-
-		return item
-
-	end,
-
 	add = function(self, subGroup)
 
 		local frame = self.frame
 
-		frame.add(subGroup.frame)
+		frame.add(subGroup.frame or subGroup)
 
 	end,
 

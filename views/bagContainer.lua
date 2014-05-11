@@ -8,7 +8,7 @@ local views = ns.views
 
 views.bagContainer = {
 
-	new = function(name, parent)
+	new = function(name, parent, itemViewCache)
 
 		local layoutOptions = {
 			wrap = true,
@@ -23,7 +23,7 @@ views.bagContainer = {
 
 			if not groups[bagID] then
 
-				local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, bagID)
+				local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, itemViewCache, bagID)
 				group.frame:SetPoint("LEFT")
 				group.frame:SetPoint("RIGHT")
 

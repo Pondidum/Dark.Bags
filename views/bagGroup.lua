@@ -5,7 +5,7 @@ local views = ns.views
 
 views.bagGroup = {
 
-	new = function(name, parent, bagNumber)
+	new = function(name, parent, itemViewCache, bagNumber)
 
 		local this = group:new(name, parent, { wrap = true, autosize = true })
 		local entries = {}
@@ -19,13 +19,14 @@ views.bagGroup = {
 
 			for k, details in pairs(contents) do
 
-				local item = this:addItem()
+				local item = itemViewCache.get()
+				item:SetParent(this.frame)
 
 				item.setDetails(details)
 				item.populate()
 
 				table.insert(entries, item)
-
+				this:add(item)
 			end
 
 		end
