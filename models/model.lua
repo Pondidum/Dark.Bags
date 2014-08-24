@@ -7,7 +7,7 @@ local itemModel = ns.itemModel
 
 local model = {
 
-	new = function(startRange, finishRange)
+	new = function(containerIDs)
 
 		local events = core.events.new()
 		local this = {}
@@ -32,7 +32,11 @@ local model = {
 
 			classifiers.beforeClassify()
 
-			for bag = startRange, finishRange do
+			for i, bag in ipairs(containerIDs) do
+			-- 	print(i,v)
+			-- end
+
+			-- for bag = startRange, finishRange do
 
 				storage[bag] = storage[bag] or {}
 
@@ -75,17 +79,19 @@ local model = {
 
 		this.getContents = function()
 
-			local current = startRange - 1
+			local current = 0
 
 			return function()
 
 				current = current + 1
 
-				if not storage[current] then
+				local containerID = containerIDs[current]
+
+				if not containerID or not storage[containerID] then
 					return nil
 				end
 
-				return current, storage[current] --i trust me to not modify the table by refrence...
+				return current, storage[containerID] --i trust me to not modify the table by refrence...
 			end
 
 		end
