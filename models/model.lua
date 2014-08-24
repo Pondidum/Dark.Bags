@@ -91,7 +91,7 @@ local model = {
 					return nil
 				end
 
-				return current, storage[containerID] --i trust me to not modify the table by refrence...
+				return containerID, storage[containerID] --i trust me to not modify the table by refrence...
 			end
 
 		end
