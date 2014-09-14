@@ -52,7 +52,7 @@ local buildBank = function()
 	local model = ns.model.new(ids)
 	local view = views.bagContainer.new("DarkBagsBank", UIParent, cache)
 
-	view.frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -10)
+	view.frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -40)
 	view.frame:SetSize(450, 200)
 
 	model.onContentsChanged = function()
