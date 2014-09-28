@@ -3,6 +3,8 @@ local addon, ns = ...
 local core = Dark.core
 local style = core.style
 
+local config = ns.config
+
 ns.views.item = {
 
 	new = function(name)
@@ -17,7 +19,7 @@ ns.views.item = {
 		_G[this:GetName() .."NewItemTexture"]:Hide()
 
 		this:ClearAllPoints()
-		this:SetSize(24, 24)
+		this:SetSize(config.buttonSize, config.buttonSize)
 
 		style.addShadow(this)
 

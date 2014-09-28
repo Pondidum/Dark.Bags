@@ -5,7 +5,11 @@
 ## Notes: Bags
 ## RequiredDeps: Dark.Core
 
+config.lua
 initialise.lua
+
+controllers\uiIntegrationController.lua
+controllers\bar.lua
 
 models\classifier.lua
 models\classifiers\equipmentSet.lua
@@ -16,8 +20,8 @@ views\item.lua
 views\group.lua
 views\bagGroup.lua
 views\bagContainer.lua
-views\goldDisplay.lua
 
-controllers\uiIntegrationController.lua
+views\goldDisplay.lua
+views\bankBagBar.lua
 
 run.lua
