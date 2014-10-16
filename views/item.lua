@@ -10,13 +10,15 @@ ns.views.item = {
 	new = function(name)
 
 		local this = CreateFrame("CheckButton", name, nil, "ContainerFrameItemButtonTemplate")
-		local count = this.count
+		local count = this.Count
 		local icon = this.icon
 		local cooldown = _G[this:GetName() .."Cooldown"]
 
 		this:SetPushedTexture("")
 		this:SetNormalTexture("")
-		_G[this:GetName() .."NewItemTexture"]:Hide()
+
+		this.NewItemTexture:Hide()
+		this.BattlepayItemTexture:Hide()
 
 		this:ClearAllPoints()
 		this:SetSize(config.buttonSize, config.buttonSize)
@@ -51,7 +53,7 @@ ns.views.item = {
 
 			CooldownFrame_SetTimer(cooldown, details.cooldownStart, details.cooldownDuration, 1, 0, 0)
 
-			if details.quality and details.quality > ITEM_QUALITY_COMMON then
+			if details.quality and details.quality > 1 then
 				this.shadow:SetBackdropBorderColor(unpack(details.qualityColor))
 			else
 				this.shadow:SetBackdropBorderColor(unpack(core.colors.shadow))
