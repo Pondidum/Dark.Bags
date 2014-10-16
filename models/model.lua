@@ -33,10 +33,6 @@ local model = {
 			classifiers.beforeClassify()
 
 			for i, bag in ipairs(containerIDs) do
-			-- 	print(i,v)
-			-- end
-
-			-- for bag = startRange, finishRange do
 
 				storage[bag] = storage[bag] or {}
 
