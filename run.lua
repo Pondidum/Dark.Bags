@@ -76,7 +76,7 @@ local run = function()
 	ui.hook()
 
 	local gold = ns.goldDisplay.new()
-	--local bankBar = ns.bankBar
+	local bankBar = ns.bankBar
 
 end
 

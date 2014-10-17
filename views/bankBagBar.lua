@@ -19,8 +19,10 @@ local bank = ns.controllers.bar:new({
 
 	init = function(self)
 
+		local parent = BankSlotsFrame
+
 		for i = 1, self.columns do
-			table.insert(self.frames, _G["BankFrameBag" .. i])
+			table.insert(self.frames, parent["Bag" .. i])
 		end
 
 		self.container:Hide()
