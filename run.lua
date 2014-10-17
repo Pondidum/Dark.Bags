@@ -18,7 +18,7 @@ end
 local buildBackpack = function()
 
 	local cache = core.cache.new(function(i)
-		return views.item.new("DarBagsBagItem"..i)
+		return views.item.new("DarkBagsBagItem"..i)
 	end)
 
 	local model = ns.model.new(range(BACKPACK_CONTAINER, NUM_BAG_SLOTS))
@@ -43,7 +43,7 @@ end
 local buildBank = function()
 
 	local cache = core.cache.new(function(i)
-		return views.item.new("DarBagskBankItem"..i)
+		return views.item.new("DarkBagsBankItem"..i)
 	end)
 
 	local ids = range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
