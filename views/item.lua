@@ -9,16 +9,13 @@ ns.views.item = {
 
 	new = function(name)
 
-		local this = CreateFrame("CheckButton", name, nil, "ContainerFrameItemButtonTemplate")
+		local this = CreateFrame("CheckButton", name, UIParent, "BankItemButtonGenericTemplate")
 		local count = this.Count
 		local icon = this.icon
 		local cooldown = _G[this:GetName() .."Cooldown"]
 
 		this:SetPushedTexture("")
 		this:SetNormalTexture("")
-
-		this.NewItemTexture:Hide()
-		this.BattlepayItemTexture:Hide()
 
 		this:ClearAllPoints()
 		this:SetSize(config.buttonSize, config.buttonSize)
@@ -62,6 +59,24 @@ ns.views.item = {
 			icon:SetDesaturated(details.locked)
 
 		end
+
+		this:SetScript('OnEnter', function (frame)
+
+			if details.link then
+				GameTooltip:SetOwner(frame, "ANCHOR_RIGHT")
+				GameTooltip:SetHyperlink(details.link)
+			else
+				GameTooltip:Hide()
+			end
+
+		end)
+
+		this:SetScript('OnLeave', function (frame)
+
+			GameTooltip:Hide()
+			ResetCursor()
+
+		end)
 
 		return this
 
