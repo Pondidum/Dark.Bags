@@ -27,6 +27,17 @@ local bar = core.frameSeries:extend({
 
 	end,
 
+	updateAll = function(self)
+
+		for i, frame in ipairs(self.frames) do
+			self:updateButton(frame)
+		end
+
+	end,
+
+	updateButton = function(self, frame)
+	end,
+
 })
 
 ns.controllers.bar = bar
