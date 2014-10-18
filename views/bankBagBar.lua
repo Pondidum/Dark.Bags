@@ -42,7 +42,7 @@ local bank = ns.controllers.bar:new({
 			button.icon:SetTexture(texture)
 		else
 			--lifed from bankFrame.lua: BankFrameItemButton_Update
-			local id, slotTextureName = GetInventorySlotInfo(strsub(button:GetName(), 10));
+			local id, slotTextureName = GetInventorySlotInfo("Bag"..button:GetID())
 			button.icon:SetTexture(slotTextureName)
 		end
 
