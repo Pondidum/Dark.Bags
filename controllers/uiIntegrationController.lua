@@ -4,7 +4,7 @@ local core = Dark.core
 local events = core.events.new()
 
 local uiIntegration = {
-	
+
 	new = function(bagContainer, bankContainer)
 
 		local originalToggleBackpack = ToggleBackpack
@@ -33,20 +33,21 @@ local uiIntegration = {
 		end
 
 		local showBank = function()
-			bankContainer:Show()
+			ShowUIPanel(bankContainer)
 		end
 
 		local hideBank = function()
 			CloseBankFrame()
 
 			if bankContainer:IsShown() then
-				bankContainer:Hide()
+				HideUIPanel(bankContainer)
 			end
 		end
 
 		local hook = function()
 			tinsert(UISpecialFrames, bagContainer:GetName())
-			tinsert(UISpecialFrames, bankContainer:GetName())
+
+			UIPanelWindows[bankContainer:GetName()] = {area = "left", pushable = 1 }
 
 			OpenAllBags = showBag
 			OpenBackpack = showBag
@@ -54,20 +55,18 @@ local uiIntegration = {
 			CloseBackpack = hideBag
 
 			ToggleBackpack = toggleBag
-			--ToggleBag = toggleBag
 			ToggleAllBags = toggleBag
 
 			BankFrame:UnregisterAllEvents()
 
 			events.register("BANKFRAME_OPENED", showBank)
-			events.register("BANKFRAME_CLOSED", function() bankContainer:Hide() end)
+			events.register("BANKFRAME_CLOSED", function() HideUIPanel(bankContainer) end)
 			bankContainer:SetScript("OnHide", hideBank)
 
 		end
 
 		local unhook = function()
 			tremove(UISpecialFrames, bagContainer:GetName())
-			tinsert(UISpecialFrames, bankContainer:GetName())
 
 			OpenAllBags = originalOpenAllBags
 			OpenBackpack = originalOpenBackpack

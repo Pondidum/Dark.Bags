@@ -52,6 +52,7 @@ local buildBank = function()
 	local model = ns.model.new(ids)
 	local view = views.bagContainer.new("DarkBagsBank", UIParent, cache)
 
+	view.frame:Hide()
 	view.frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -40)
 	view.frame:SetSize(450, 200)
 
