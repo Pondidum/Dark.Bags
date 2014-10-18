@@ -24,8 +24,8 @@ views\bagContainer.lua
 views\goldDisplay.lua
 views\bankBagBar.lua
 
-sets\containerSet.lua
-sets\bagContainerSet.lua
-sets\bankContainerSet.lua
+sets\container.lua
+sets\bag.lua
+sets\bank.lua
 
 run.lua
