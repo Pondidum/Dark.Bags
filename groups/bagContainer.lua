@@ -4,9 +4,9 @@ local core = Dark.core
 local style = core.style
 
 local group = ns.group
-local views = ns.views
+local groups = ns.groups
 
-views.bagContainer = {
+groups.bagContainer = {
 
 	new = function(name, parent, itemViewCache)
 
@@ -17,13 +17,13 @@ views.bagContainer = {
 		}
 
 		local this = group:new(name, parent, layoutOptions)
-		local groups = {}
+		local childGroups = {}
 
 		local buildOrGetGroup = function(bagID)
 
-			if not groups[bagID] then
+			if not childGroups[bagID] then
 
-				local group = views.bagGroup.new(name .. "Bag" .. bagID, this.frame, itemViewCache, bagID)
+				local group = groups.bagGroup.new(name .. "Bag" .. bagID, this.frame, itemViewCache, bagID)
 				group.frame:SetPoint("LEFT")
 				group.frame:SetPoint("RIGHT")
 
@@ -31,10 +31,10 @@ views.bagContainer = {
 				style.addShadow(group.frame)
 
 				this:add(group)
-				groups[bagID] = group
+				childGroups[bagID] = group
 			end
 
-			return groups[bagID]
+			return childGroups[bagID]
 
 		end
 
@@ -52,7 +52,7 @@ views.bagContainer = {
 
 		this.update = function()
 
-			for bagID, group in pairs(groups) do
+			for bagID, group in pairs(childGroups) do
 				group.update()
 			end
 

@@ -2,6 +2,7 @@ local addon, ns = ...
 
 local core = Dark.core
 local views = ns.views
+local groups = ns.groups
 
 local containerSet = {
 
@@ -23,7 +24,7 @@ local containerSet = {
 		end)
 
 		local model = ns.model.new(self.containers)
-		local view = views.bagContainer.new(self.name, UIParent, cache)
+		local view = groups.bagContainer.new(self.name, UIParent, cache)
 
 		self:customise(view.frame)
 

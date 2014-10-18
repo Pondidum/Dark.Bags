@@ -1,9 +1,9 @@
 local addon, ns = ...
 
 local group = ns.group
-local views = ns.views
+local groups = ns.groups
 
-views.bagGroup = {
+groups.bagGroup = {
 
 	new = function(name, parent, itemViewCache, bagNumber)
 

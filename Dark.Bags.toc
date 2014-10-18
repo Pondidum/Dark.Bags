@@ -16,11 +16,12 @@ models\classifiers\equipmentSet.lua
 models\itemModel.lua
 models\model.lua
 
-views\item.lua
-views\group.lua
-views\bagGroup.lua
-views\bagContainer.lua
 
+groups\group.lua
+groups\bagGroup.lua
+groups\bagContainer.lua
+
+views\item.lua
 views\goldDisplay.lua
 views\bankBagBar.lua
 
