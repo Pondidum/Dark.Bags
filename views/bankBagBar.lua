@@ -30,6 +30,7 @@ local bank = ns.controllers.bar:new({
 
 	customiseFrame = function(self, button)
 
+		button.tooltipText = BANK_BAG
 		button:SetParent(self.container)
 		button:SetSize(config.buttonSize, config.buttonSize)
 		button:Show()
