@@ -31,11 +31,18 @@ local bank = ns.controllers.bar:new({
 	customiseFrame = function(self, button)
 
 		button.tooltipText = BANK_BAG
+
 		button:SetParent(self.container)
 		button:SetSize(config.buttonSize, config.buttonSize)
 		button:Show()
 
 		style.itemButton(button)
+
+		self:updateButton(button)
+
+	end,
+
+	updateButton = function(self, button)
 
 		local texture = GetInventoryItemTexture("player", button:GetInventorySlot())
 
@@ -49,6 +56,15 @@ local bank = ns.controllers.bar:new({
 
 	end,
 })
+
+events.register("PLAYERBANKBAGSLOTS_CHANGED", function()
+	bank:updateAll()
+end)
+
+events.register("PLAYERBANKSLOTS_CHANGED", function()
+	bank:updateAll()
+end)
+
 
 events.register("BANKFRAME_OPENED", function()
 	bank.container:Show()
