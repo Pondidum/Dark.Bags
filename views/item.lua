@@ -64,7 +64,14 @@ ns.views.item = {
 
 			if details.link then
 				GameTooltip:SetOwner(frame, "ANCHOR_RIGHT")
-				GameTooltip:SetHyperlink(details.link)
+
+				--eeeeeewwww. why does SetBagItem have to be so crap
+				if details.bag == BANK_CONTAINER then
+					GameTooltip:SetHyperlink(details.link)
+				else
+					GameTooltip:SetBagItem(details.bag, details.slot)
+				end
+
 			else
 				GameTooltip:Hide()
 			end
