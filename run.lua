@@ -47,7 +47,8 @@ local buildBank = function()
 	end)
 
 	local ids = range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
-	table.insert(ids, 1, BANK_CONTAINER)
+	table.insert(ids, 1, REAGENTBANK_CONTAINER)
+	table.insert(ids, 2, BANK_CONTAINER)
 
 	local model = ns.model.new(ids)
 	local view = views.bagContainer.new("DarkBagsBank", UIParent, cache)
