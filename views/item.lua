@@ -31,8 +31,6 @@ ns.views.item = {
 		icon:SetAllPoints(this)
 		icon:SetTexCoord(.08, .92, .08, .92)
 
-		this.UpdateTooltip = function() end
-
 		local details
 
 		this.setDetails = function(info)
@@ -62,7 +60,7 @@ ns.views.item = {
 
 		end
 
-		this:SetScript('OnEnter', function (frame)
+		local onEnter = function (frame)
 
 			if details.link then
 				GameTooltip:SetOwner(frame, "ANCHOR_RIGHT")
@@ -71,14 +69,32 @@ ns.views.item = {
 				GameTooltip:Hide()
 			end
 
-		end)
+			if IsModifiedClick("DRESSUP") and details.link then
+				ShowInspectCursor()
 
-		this:SetScript('OnLeave', function (frame)
+			elseif MerchantFrame:IsShown() and MerchantFrame.selectedTab == 1 then
+				ShowContainerSellCursor(details.bag, details.slot)
+
+			elseif details.readable then
+				ShowInspectCursor()
+
+			else
+				ResetCursor()
+			end
+
+		end
+
+		local onLeave = function (frame)
 
 			GameTooltip:Hide()
 			ResetCursor()
 
-		end)
+		end
+
+		this.UpdateTooltip = onEnter
+
+		this:SetScript('OnEnter', onEnter)
+		this:SetScript('OnLeave', OnLeave)
 
 		return this
 
