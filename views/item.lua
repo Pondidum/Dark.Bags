@@ -31,6 +31,8 @@ ns.views.item = {
 		icon:SetAllPoints(this)
 		icon:SetTexCoord(.08, .92, .08, .92)
 
+		this.UpdateTooltip = function() end
+
 		local details
 
 		this.setDetails = function(info)
