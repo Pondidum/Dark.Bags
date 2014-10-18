@@ -3,78 +3,93 @@ local addon, ns = ...
 local core = Dark.core
 local views = ns.views
 
-local range = function(start, finish)
+local containerSet = {
 
-	local out = {}
+	extend = function(self, this)
+		return setmetatable(this, { __index = self})
+	end,
 
-	for i=start, finish do
-		table.insert(out, i)
+	new = function(self)
+
+		local this = setmetatable({}, { __index = self })
+		this:ctor()
+		return this
+	end,
+
+	ctor = function(self)
+
+		local cache = core.cache.new(function(i)
+			return views.item.new(self.name .. "BagItem"..i)
+		end)
+
+		local model = ns.model.new(self.containers)
+		local view = views.bagContainer.new(self.name, UIParent, cache)
+
+		self:customise(view.frame)
+
+		model.onContentsChanged = function()
+			cache.recycleAll()
+			view.populate(model.getContents())
+		end
+
+		model.onCooldownsUpdated = function()
+			view.update()
+		end
+
+		self.frame = view.frame
+
+	end,
+
+	range = function(self, start, finish)
+
+		local out = {}
+
+		for i = start, finish do
+			table.insert(out, i)
+		end
+
+		return unpack(out)
+
 	end
+}
 
-	return out
 
-end
+local bankSet = containerSet:extend({
 
-local buildBackpack = function()
+	name = "DarkBagsBank",
+	containers = {
+		REAGENTBANK_CONTAINER,
+		BANK_CONTAINER,
+		containerSet:range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
+	},
 
-	local cache = core.cache.new(function(i)
-		return views.item.new("DarkBagsBagItem"..i)
-	end)
+	customise = function(self, frame)
+		frame:Hide()
+		frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -40)
+		frame:SetSize(450, 200)
+	end,
 
-	local model = ns.model.new(range(BACKPACK_CONTAINER, NUM_BAG_SLOTS))
-	local view = views.bagContainer.new("DarkBagsBackpack", UIParent, cache)
+})
 
-	view.frame:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
-	view.frame:SetSize(450, 200)
+local bagSet = containerSet:extend({
 
-	model.onContentsChanged = function()
-		cache.recycleAll()
-		view.populate(model.getContents())
-	end
+	name = "DarkBagsBackpack",
+	containers = {
+		containerSet:range(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
+	},
 
-	model.onCooldownsUpdated = function()
-		view.update()
-	end
-
-	return view.frame
-
-end
-
-local buildBank = function()
-
-	local cache = core.cache.new(function(i)
-		return views.item.new("DarkBagsBankItem"..i)
-	end)
-
-	local ids = range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
-	table.insert(ids, 1, REAGENTBANK_CONTAINER)
-	table.insert(ids, 2, BANK_CONTAINER)
-
-	local model = ns.model.new(ids)
-	local view = views.bagContainer.new("DarkBagsBank", UIParent, cache)
-
-	view.frame:Hide()
-	view.frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -40)
-	view.frame:SetSize(450, 200)
-
-	model.onContentsChanged = function()
-		cache.recycleAll()
-		view.populate(model.getContents())
-	end
-
-	model.onCooldownsUpdated = function()
-		view.update()
-	end
-
-	return view.frame
-end
+	customise = function(self, frame)
+		frame:SetPoint("TOPRIGHT", MultiBarRight, "BOTTOMRIGHT", 0, -10)
+		frame:SetSize(450, 200)
+	end,
+})
 
 local run = function()
 
-	local pack = buildBackpack()
-	local bank = buildBank()
+	local pack = bagSet:new()
+	local bank = bankSet:new()
 
-	local ui = ns.controllers.uiIntegration.new(pack, bank)
+	local ui = ns.controllers.uiIntegration.new(pack.frame, bank.frame)
 	ui.hook()
 
 	local gold = ns.goldDisplay.new()
