@@ -1,12 +1,12 @@
 local addon, ns = ...
 
-local containerSet = ns.containerSet
+local container = ns.sets.container
 
-local bagContainerSet = containerSet:extend({
+ns.sets.bag = container:extend({
 
 	name = "DarkBagsBackpack",
 	containers = {
-		containerSet:range(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
+		container:range(BACKPACK_CONTAINER, NUM_BAG_SLOTS)
 	},
 
 	customise = function(self, frame)
@@ -14,6 +14,3 @@ local bagContainerSet = containerSet:extend({
 		frame:SetSize(450, 200)
 	end,
 })
-
-ns.bagContainerSet = bagContainerSet
-

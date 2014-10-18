@@ -1,14 +1,14 @@
 local addon, ns = ...
 
-local containerSet = ns.containerSet
+local container = ns.sets.container
 
-local bankContainerSet = containerSet:extend({
+ns.sets.bank = container:extend({
 
 	name = "DarkBagsBank",
 	containers = {
 		REAGENTBANK_CONTAINER,
 		BANK_CONTAINER,
-		containerSet:range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
+		container:range(NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS)
 	},
 
 	customise = function(self, frame)
@@ -18,5 +18,3 @@ local bankContainerSet = containerSet:extend({
 	end,
 
 })
-
-ns.bankContainerSet = bankContainerSet

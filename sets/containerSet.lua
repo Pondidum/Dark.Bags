@@ -53,4 +53,4 @@ local containerSet = {
 	end
 }
 
-ns.containerSet = containerSet
+ns.sets.container = containerSet
