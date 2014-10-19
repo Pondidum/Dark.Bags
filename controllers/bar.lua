@@ -5,9 +5,9 @@ local config = ns.config
 
 local bar = core.frameSeries:extend({
 
-	new = function(self, this)
+	new = function(self)
 
-		setmetatable(this, { __index = self })
+		local this = setmetatable({}, { __index = self })
 
 		this.frames = {}
 		this.frameSize = config.buttonSize
