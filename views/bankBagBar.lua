@@ -8,7 +8,7 @@ local events = core.events:new()
 local config = ns.config
 local bar = ns.bar
 
-local bank = ns.controllers.bar:new({
+local bank = ns.controllers.bar:extend({
 
 	name = "Bank",
 	container = CreateFrame("Frame", "DarkBankBagFrame", UIParent),
@@ -25,6 +25,18 @@ local bank = ns.controllers.bar:new({
 			table.insert(self.frames, parent["Bag" .. i])
 		end
 
+		events.register("PLAYERBANKBAGSLOTS_CHANGED", function() self:updateAll() end)
+		events.register("PLAYERBANKSLOTS_CHANGED", function()  self:updateAll() end)
+
+		events.register("BANKFRAME_OPENED", function()
+			self.container:Show()
+			self:layout()
+		end)
+
+		events.register("BANKFRAME_CLOSED", function()
+			self.container:Hide()
+		end)
+
 		self.container:Hide()
 	end,
 
@@ -37,6 +49,10 @@ local bank = ns.controllers.bar:new({
 		button:Show()
 
 		style.itemButton(button)
+
+		button:SetScript("OnClick", function(this)
+
+		end)
 
 		self:updateButton(button)
 
@@ -56,23 +72,5 @@ local bank = ns.controllers.bar:new({
 
 	end,
 })
-
-events.register("PLAYERBANKBAGSLOTS_CHANGED", function()
-	bank:updateAll()
-end)
-
-events.register("PLAYERBANKSLOTS_CHANGED", function()
-	bank:updateAll()
-end)
-
-
-events.register("BANKFRAME_OPENED", function()
-	bank.container:Show()
-	bank:layout()
-end)
-
-events.register("BANKFRAME_CLOSED", function()
-	bank.container:Hide()
-end)
 
 ns.bankBar = bank
