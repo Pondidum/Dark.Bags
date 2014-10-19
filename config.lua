@@ -2,7 +2,7 @@ local addon, ns = ...
 
 local config = {
 	buttonSize = 24,
-	spacing = 6,
+	spacing = 4,
 	screenPadding = 10,
 }
 

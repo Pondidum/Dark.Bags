@@ -12,7 +12,6 @@ local bank = ns.controllers.bar:extend({
 
 	name = "Bank",
 	container = CreateFrame("Frame", "DarkBankBagFrame", UIParent),
-	anchor = { "TOPLEFT", "UIParent", "TOPLEFT", config.screenPadding, -config.screenPadding },
 
 	rows = 1,
 	columns = 7,

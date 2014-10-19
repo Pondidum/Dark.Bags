@@ -1,4 +1,5 @@
 local addon, ns = ...
+local config = ns.config
 
 local container = ns.sets.container
 
@@ -17,6 +18,8 @@ ns.sets.bank = container:extend({
 		frame:Hide()
 		frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -40)
 		frame:SetSize(450, 200)
+
+		self.buttons.anchor = { "BOTTOMLEFT", frame, "TOPLEFT", config.spacing, 0 }
 	end,
 
 
