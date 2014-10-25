@@ -46,6 +46,7 @@ ns.views.item = {
 				count:SetText("")
 			end
 
+			this.count = details.count
 			this:SetID(details.slot)
 
 			CooldownFrame_SetTimer(cooldown, details.cooldownStart, details.cooldownDuration, 1, 0, 0)
