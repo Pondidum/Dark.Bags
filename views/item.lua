@@ -9,7 +9,7 @@ ns.views.item = {
 
 	new = function(name)
 
-		local this = CreateFrame("CheckButton", name, UIParent, "BankItemButtonGenericTemplate")
+		local this = CreateFrame("CheckButton", name, UIParent, "ContainerFrameItemButtonTemplate")
 		local count = this.Count
 		local icon = this.icon
 		local cooldown = _G[this:GetName() .."Cooldown"]
@@ -22,6 +22,8 @@ ns.views.item = {
 
 		style.addShadow(this)
 
+		this.BattlepayItemTexture:SetTexture(nil)
+		this.BattlepayItemTexture:Hide()
 		this:Show()
 
 		count:ClearAllPoints()
