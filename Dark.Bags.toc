@@ -23,6 +23,7 @@ groups\bagContainer.lua
 
 views\item.lua
 views\goldDisplay.lua
+views\currencyDisplay.lua
 views\bankBagBar.lua
 
 sets\container.lua

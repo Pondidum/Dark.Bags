@@ -1,16 +1,11 @@
+local addon, ns = ...
+
 local core = Dark.core
 local style = core.style
 local events = core.events.new()
 local ui = core.ui
 
-local config = {
-  currencies = {
-    823, -- apexis
-    824,  -- garrison resources
-  }
-}
-
---GetCurrencyInfo(
+local config = ns.config
 
 local currencyDisplay = {
   new = function()
@@ -46,4 +41,4 @@ local currencyDisplay = {
   end
 }
 
-currencyDisplay.new()
+ns.currencyDisplay = currencyDisplay
