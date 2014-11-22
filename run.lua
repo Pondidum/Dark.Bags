@@ -11,6 +11,7 @@ local run = function()
 	ui.hook()
 
 	local gold = ns.goldDisplay.new()
+	local currency = ns.currencyDisplay.new()
 
 end
 
