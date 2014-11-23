@@ -13,6 +13,7 @@ ns.sets.bank = container:extend({
 	},
 
 	buttons = ns.bankBar:new(),
+	extra = ns.extraButtons:new(),
 
 	customise = function(self, frame)
 		frame:Hide()
@@ -20,6 +21,8 @@ ns.sets.bank = container:extend({
 		frame:SetSize(450, 200)
 
 		self.buttons.anchor = { "BOTTOMLEFT", frame, "TOPLEFT", config.spacing, 0 }
+
+		self.extra.frame:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", -config.spacing, 0)
 	end,
 
 
