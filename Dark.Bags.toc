@@ -25,6 +25,7 @@ views\item.lua
 views\goldDisplay.lua
 views\currencyDisplay.lua
 views\bankBagBar.lua
+views\extraButtons.lua
 
 sets\container.lua
 sets\bag.lua
