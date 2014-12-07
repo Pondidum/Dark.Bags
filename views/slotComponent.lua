@@ -105,6 +105,9 @@ local slotComponent = class:extend({
 
 	end,
 
+	setParent = function(self, parent)
+		self.frame:SetParent(parent)
+	end,
 })
 
 ns.slotComponent = slotComponent
