@@ -1,13 +1,15 @@
 local addon, ns = ...
 
-local layoutEngine = Darker.layoutEngine
+local layoutEngine = ns.lib.engine
 local layout = ns.layout
+local slotContainer = ns.slotContainer
 
 local bagLayout = layout:extend({
 
 	ctor = function(self)
 
 		self.container = CreateFrame("Frame", "DarkBagsContainerLayout", UIParent)
+
 		self.engine = layoutEngine:new(self.container, {
 			type = "vertical",
 			origin = "TOPLEFT",
@@ -21,7 +23,7 @@ local bagLayout = layout:extend({
 
 	performLayout = function(self, contents)
 
-		for i, slotComponent in contents do
+		for i, slotComponent in ipairs(contents) do
 
 			local bag = self:getOrCreateBag(slotComponent.bag)
 			bag:add(slotComponent)
@@ -38,11 +40,11 @@ local bagLayout = layout:extend({
 		if bag then
 			return bag
 		end
+		print(bagID)
+		bag = slotContainer:new(bagID)
 
-		bag = slotContainer:new()
-
-		bags[bagID] = bag
-		self.engine:addChild(bag)
+		self.bags[bagID] = bag
+		self.engine:addChild(bag.frame)
 
 		return bag
 	end,
@@ -51,3 +53,4 @@ local bagLayout = layout:extend({
 })
 
 ns.layout:add("bagLayout", bagLayout)
+ns.bagLayout = bagLayout
