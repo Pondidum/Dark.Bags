@@ -1,9 +1,11 @@
 local addon, ns = ...
+local class = ns.lib.class
+
 local slotComponent = ns.slotComponent
 
-local slotBuilder = {
+local slotBuilder = class:extend({
 
-	new = function(self)
+	ctor = function(self)
 
 		self.bagFrames = {}
 		self.slots = {}
@@ -15,17 +17,17 @@ local slotBuilder = {
 
 	getOrCreate = function(self, bagID)
 
-		local bag = self.bagFrames[bagID]
+		local frame = self.bagFrames[bagID]
 
-		if bag then
-			return bag
+		if frame then
+			return frame
 		end
 
-		bag = CreateFrame("Frame", "DarkBagsBag"..bagID, UIParent)
-		bagFrame:Hide()
-		bagFrame:SetID(bagID)
+		frame = CreateFrame("Frame", "DarkBagsBag"..bagID, UIParent)
+		frame:Hide()
+		frame:SetID(bagID)
 
-		self.bagFrames[bagID] = bagFrame
+		self.bagFrames[bagID] = frame
 
 	end,
 
@@ -48,6 +50,6 @@ local slotBuilder = {
 		end
 
 	end,
-}
+})
 
 ns.slotBuilder = slotBuilder
