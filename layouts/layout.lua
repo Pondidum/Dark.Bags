@@ -1,5 +1,6 @@
 local addon, ns = ...
 
+local class = ns.lib.class
 local layouts = {}
 
 local layout = class:extend({
