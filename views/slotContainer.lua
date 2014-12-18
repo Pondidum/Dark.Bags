@@ -21,7 +21,7 @@ local slotContainer = class:extend({
 	end,
 
 	add = function(self, component)
-		self.engine:addChild(component)
+		self.engine:addChild(component.frame)
 	end,
 
 })
