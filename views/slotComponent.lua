@@ -28,6 +28,7 @@ local slotComponent = class:extend({
 		frame:SetPushedTexture("")
 		frame:SetNormalTexture("")
 
+		frame:SetSize(25, 25)
 		style:border(frame)
 
 		frame.BattlepayItemTexture:SetTexture(nil)
@@ -38,6 +39,7 @@ local slotComponent = class:extend({
 		count:SetPoint("BottomRight")
 		count:Show()
 
+		icon:ClearAllPoints()
 		icon:SetAllPoints(frame)
 		icon:SetTexCoord(.08, .92, .08, .92)
 
