@@ -4,15 +4,14 @@ local sets = ns.sets
 
 local run = function()
 
-	local pack = sets.bag:new()
-	local bank = sets.bank:new()
 
-	local ui = ns.controllers.uiIntegration.new(pack.frame, bank.frame)
-	ui.hook()
+	local builder = ns.slotBuilder:new()
+	builder:populate()
 
-	local gold = ns.goldDisplay.new()
-	local currency = ns.currencyDisplay.new()
+	local layout = ns.bagLayout:new()
+	layout:performLayout(builder.slots)
 
+	layout.container:SetPoint("LEFT", 20)
 end
 
 run()
