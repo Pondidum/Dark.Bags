@@ -8,27 +8,12 @@
 config.lua
 initialise.lua
 
-controllers\uiIntegrationController.lua
-controllers\bar.lua
+views\slotComponent.lua
+views\slotContainer.lua
 
-models\classifier.lua
-models\classifiers\equipmentSet.lua
-models\itemModel.lua
-models\model.lua
+models\slotBuilder.lua
 
-
-groups\group.lua
-groups\bagGroup.lua
-groups\bagContainer.lua
-
-views\item.lua
-views\goldDisplay.lua
-views\currencyDisplay.lua
-views\bankBagBar.lua
-views\extraButtons.lua
-
-sets\container.lua
-sets\bag.lua
-sets\bank.lua
+layouts\layout.lua
+layouts\bagLayout.lua
 
 run.lua
