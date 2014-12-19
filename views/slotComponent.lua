@@ -102,7 +102,7 @@ local slotComponent = class:extend({
 		if model.quality and model.quality > 1 then
 			frame:SetBackdropBorderColor(unpack(model.qualityColor))
 		else
-			frame:SetBackdropBorderColor(unpack(core.colors.shadow))
+			frame:SetBackdropBorderColor(0, 0, 0, 0.8)
 		end
 
 	end,
