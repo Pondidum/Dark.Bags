@@ -29,7 +29,7 @@ local slotComponent = class:extend({
 		frame:SetNormalTexture("")
 
 		frame:SetSize(25, 25)
-		style:border(frame)
+		style:frame(frame)
 
 		frame.BattlepayItemTexture:SetTexture(nil)
 		frame.BattlepayItemTexture:Hide()
