@@ -24,7 +24,6 @@ local slotBuilder = class:extend({
 		end
 
 		frame = CreateFrame("Frame", "DarkBagsBag"..bagID, UIParent)
-		frame:Hide()
 		frame:SetID(bagID)
 
 		self.bagFrames[bagID] = frame
