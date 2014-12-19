@@ -30,6 +30,10 @@ local bagLayout = layout:extend({
 
 		end
 
+		for id, bag in pairs(self.bags) do
+			bag.engine:performLayout()
+		end
+
 		self.engine:performLayout()
 	end,
 
@@ -40,7 +44,7 @@ local bagLayout = layout:extend({
 		if bag then
 			return bag
 		end
-		print(bagID)
+
 		bag = slotContainer:new(bagID)
 
 		self.bags[bagID] = bag
