@@ -28,6 +28,7 @@ local slotBuilder = class:extend({
 
 		self.bagFrames[bagID] = frame
 
+		return frame
 	end,
 
 	populate = function(self)
