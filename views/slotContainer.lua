@@ -1,6 +1,7 @@
 local addon, ns = ...
 
 local class = ns.lib.class
+local style = ns.lib.style
 local layoutEngine = ns.lib.engine
 
 local slotContainer = class:extend({
@@ -17,6 +18,8 @@ local slotContainer = class:extend({
 			itemSpacing = 6,
 			autosize = "y"
 		})
+
+		style:frame(self.frame)
 
 	end,
 
