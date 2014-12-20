@@ -9,12 +9,6 @@ local initialise = function()
 		engine = Darker.layoutEngine,
 	}
 
-	ns.groups = {}
-	ns.sets = {}
-
-	ns.views = {}
-	ns.controllers = {}
-
 end
 
 initialise()
