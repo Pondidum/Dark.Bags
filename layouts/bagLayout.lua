@@ -11,7 +11,7 @@ local bagLayout = layout:extend({
 		self.container = CreateFrame("Frame", "DarkBagsContainerLayout", UIParent)
 
 		self.engine = layoutEngine:new(self.container, {
-			type = "vertical",
+			layout = "vertical",
 			origin = "TOPLEFT",
 			wrap = false,
 			itemSpacing = 6,

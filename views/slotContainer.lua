@@ -12,7 +12,7 @@ local slotContainer = class:extend({
 		self.frame:SetWidth(250)
 
 		self.engine = layoutEngine:new(self.frame, {
-			type = "horizontal",
+			layout = "horizontal",
 			origin = "TOPLEFT",
 			wrap = true,
 			itemSpacing = 6,
