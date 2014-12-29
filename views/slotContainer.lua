@@ -9,7 +9,7 @@ local slotContainer = class:extend({
 	ctor = function(self, nameSuffix)
 
 		self.frame = CreateFrame("Frame", "DarkBagsContainer" .. nameSuffix, UIParent)
-		self.frame:SetWidth(250)
+		self.frame:SetWidth(306)
 
 		self.engine = layoutEngine:new(self.frame, {
 			layout = "horizontal",
