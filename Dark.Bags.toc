@@ -13,6 +13,8 @@ views\slotContainer.lua
 
 models\slotBuilder.lua
 
+controllers\bagToggle.lua
+
 layouts\layout.lua
 layouts\bagLayout.lua
 
