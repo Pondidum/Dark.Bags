@@ -1,7 +1,7 @@
 local addon, ns = ...
 
-local class = Darker.class
-local events = Darker.events
+local class = ns.lib.class
+local events = ns.lib.events
 
 local orchestrator = class:extend({
 
