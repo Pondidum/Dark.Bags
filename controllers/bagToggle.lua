@@ -4,31 +4,25 @@ local class = ns.lib.class
 
 local bagToggle = class:extend({
 
-	ctor = function(self, targetFrame)
+	ctor = function(self, target)
 
-		self.target = targetFrame
+		self.target = target
 
 	end,
 
 	hook = function(self)
 
 		local showBag = function()
-			self.target:Show()
+			self.target:show()
 		end
 
 		local hideBag = function()
-			self.target:Hide()
+			self.target:hide()
 		end
 
 		local toggleBag = function()
-			if self.target:IsShown() then
-				hideBag()
-			else
-				showBag()
-			end
+			self.target:toggle()
 		end
-
-		tinsert(UISpecialFrames, self.target:GetName())
 
 		hooksecurefunc("OpenAllBags", showBag)
 		hooksecurefunc("OpenBackpack", showBag)

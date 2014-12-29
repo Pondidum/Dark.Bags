@@ -22,6 +22,12 @@ local bagLayout = layout:extend({
 		})
 
 		self.bags = {}
+
+		tinsert(UISpecialFrames, self.container:GetName())
+
+		local toggle = ns.bagToggle:new(self)
+		toggle:hook()
+
 	end,
 
 	performLayout = function(self, contents)
@@ -35,10 +41,7 @@ local bagLayout = layout:extend({
 
 		end
 
-		for id, bag in pairs(self.bags) do
-			bag.engine:performLayout()
-		end
-
+		self:forEachBag(function(bag) bag.engine:performLayout() end)
 		self.engine:performLayout()
 	end,
 
@@ -58,7 +61,37 @@ local bagLayout = layout:extend({
 		return bag
 	end,
 
+	forEachBag = function(self, action)
 
+		for id, bag in pairs(self.bags) do
+			action(bag)
+		end
+
+	end,
+
+	show = function(self)
+
+		self.container:Show()
+		self:forEachBag(function(bag) bag:show() end)
+
+	end,
+
+	hide = function(self)
+
+		self.container:Hide()
+		self:forEachBag(function(bag) bag:hide() end)
+
+	end,
+
+	toggle = function(self)
+
+		if self.container:IsShown() then
+			self:hide()
+		else
+			self:show()
+		end
+
+	end,
 })
 
 ns.layout:add("bagLayout", bagLayout)

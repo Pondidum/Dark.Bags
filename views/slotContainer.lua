@@ -20,11 +20,32 @@ local slotContainer = class:extend({
 		})
 
 		style:frame(self.frame)
-
+		self.items = {}
 	end,
 
 	add = function(self, component)
 		self.engine:addChild(component.frame)
+		table.insert(self.items, component.frame)
+	end,
+
+	show = function(self)
+
+		self.frame:Show()
+
+		for i, item in ipairs(self.items) do
+			item:Show()
+		end
+
+	end,
+
+	hide = function(self)
+
+		self.frame:Hide()
+
+		for i, item in ipairs(self.items) do
+			item:Hide()
+		end
+
 	end,
 
 })
