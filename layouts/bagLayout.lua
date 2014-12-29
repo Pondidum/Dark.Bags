@@ -6,7 +6,10 @@ local slotContainer = ns.slotContainer
 
 local bagLayout = layout:extend({
 
-	ctor = function(self)
+	ctor = function(self, bagStart, bagFinish)
+
+		self.bagStart = bagStart or BACKPACK_CONTAINER
+		self.bagFinish = bagFinish or BACKPACK_CONTAINER + NUM_BAG_SLOTS
 
 		self.container = CreateFrame("Frame", "DarkBagsContainerLayout", UIParent)
 
@@ -25,8 +28,10 @@ local bagLayout = layout:extend({
 
 		for i, slotComponent in ipairs(contents) do
 
-			local bag = self:getOrCreateBag(slotComponent.bag)
-			bag:add(slotComponent)
+			if slotComponent.bag >= self.bagStart and slotComponent.bag <= self.bagFinish then
+				local bag = self:getOrCreateBag(slotComponent.bag)
+				bag:add(slotComponent)
+			end
 
 		end
 
