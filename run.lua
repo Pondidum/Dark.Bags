@@ -12,7 +12,7 @@ local run = function()
 		slot:updateView()
 	end
 
-	local layout = ns.bagLayout:new()
+	local layout = ns.bagLayout:new(BACKPACK_CONTAINER, BACKPACK_CONTAINER + NUM_BAG_SLOTS)
 	layout:performLayout(builder.slots)
 
 	layout.container:SetPoint("LEFT", UIParent, "LEFT", 20, 0)
