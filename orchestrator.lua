@@ -5,13 +5,13 @@ local events = ns.lib.events
 
 local orchestrator = class:extend({
 
-	ctor = function(self, slotBuilder)
+	ctor = function(self, contentsModel)
 		self:include(events)
 
 		self:register("BAG_UPDATE_COOLDOWN")
 		self:register("BAG_UPDATE_DELAYED")
 
-		self.builder = slotBuilder
+		self.builder = contentsModel
 	end,
 
 	BAG_UPDATE_DELAYED = function(self)

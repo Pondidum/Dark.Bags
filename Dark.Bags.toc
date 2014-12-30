@@ -11,7 +11,7 @@ initialise.lua
 views\slotComponent.lua
 views\slotContainer.lua
 
-models\slotBuilder.lua
+models\contentsModel.lua
 
 controllers\bagToggle.lua
 

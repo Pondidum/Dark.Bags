@@ -3,7 +3,7 @@ local class = ns.lib.class
 
 local slotComponent = ns.slotComponent
 
-local slotBuilder = class:extend({
+local contentsModel = class:extend({
 
 	ctor = function(self)
 
@@ -52,4 +52,4 @@ local slotBuilder = class:extend({
 	end,
 })
 
-ns.slotBuilder = slotBuilder
+ns.contentsModel = contentsModel

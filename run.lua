@@ -12,7 +12,7 @@ local run = function()
 	ToggleBackpack = function() end
 	ToggleAllBags = function() end
 
-	local builder = ns.slotBuilder:new()
+	local builder = ns.contentsModel:new()
 	builder:populate()
 
 	for i, slot in ipairs(builder.slots) do
@@ -22,6 +22,7 @@ local run = function()
 
 	local layout = ns.bagLayout:new(BACKPACK_CONTAINER, BACKPACK_CONTAINER + NUM_BAG_SLOTS)
 	layout:performLayout(builder.slots)
+	layout:hide()
 
 	layout.container:SetPoint("LEFT", UIParent, "LEFT", 20, 0)
 
