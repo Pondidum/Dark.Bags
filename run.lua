@@ -13,6 +13,8 @@ local run = function()
 	ToggleAllBags = function() end
 
 	local model = ns.contentsModel:new()
+	model:populate()
+
 	local updater = ns.modelUpdater:new(model)
 	updater:updateSlots()
 

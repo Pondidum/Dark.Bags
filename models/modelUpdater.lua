@@ -24,7 +24,7 @@ local modelUpdater = class:extend({
 
 	updateSlots = function(self)
 
-		self.model.forEach(function(i, slot)
+		self.model:forEach(function(i, slot)
 			slot:updateModel()
 			slot:updateView()
 		end)
