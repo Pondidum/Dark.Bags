@@ -50,6 +50,14 @@ local contentsModel = class:extend({
 		end
 
 	end,
+
+	forEach = function(self, action)
+
+		for i, slot in ipairs(self.slots) do
+			action(i, slot)
+		end
+
+	end,
 })
 
 ns.contentsModel = contentsModel

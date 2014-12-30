@@ -3,7 +3,7 @@ local addon, ns = ...
 local class = ns.lib.class
 local events = ns.lib.events
 
-local orchestrator = class:extend({
+local modelUpdater = class:extend({
 
 	ctor = function(self, contentsModel)
 		self:include(events)
@@ -11,7 +11,7 @@ local orchestrator = class:extend({
 		self:register("BAG_UPDATE_COOLDOWN")
 		self:register("BAG_UPDATE_DELAYED")
 
-		self.builder = contentsModel
+		self.model = contentsModel
 	end,
 
 	BAG_UPDATE_DELAYED = function(self)
@@ -24,10 +24,12 @@ local orchestrator = class:extend({
 
 	updateSlots = function(self)
 
-		for i, slot in ipairs(self.builder.slots) do
+		self.model.forEach(function(i, slot)
 			slot:updateModel()
 			slot:updateView()
-		end
+		end)
 
 	end,
 })
+
+ns.modelUpdater = modelUpdater
