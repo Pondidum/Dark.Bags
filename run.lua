@@ -12,6 +12,9 @@ local run = function()
 	ToggleBackpack = function() end
 	ToggleAllBags = function() end
 
+	--BankFrame:UnregisterAllEvents()
+
+
 	local model = ns.contentsModel:new()
 	model:populate()
 
