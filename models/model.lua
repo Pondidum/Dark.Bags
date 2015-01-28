@@ -2,7 +2,6 @@ local addon, ns = ...
 
 local core = Dark.core
 
-local classifiers = ns.classifiers
 local itemModel = ns.itemModel
 
 local model = {
@@ -30,8 +29,6 @@ local model = {
 
 		local fullRescan = function()
 
-			classifiers.beforeClassify()
-
 			for i, bag in ipairs(containerIDs) do
 
 				storage[bag] = storage[bag] or {}
@@ -41,15 +38,12 @@ local model = {
 					local info = storage[bag][slot] or itemModel:new(bag, slot)
 
 					info:update()
-					info:classify(classifiers)
 
 					storage[bag][slot] = info
 
 				end
 
 			end
-
-			classifiers.afterClassify()
 
 			this.onContentsChanged()
 

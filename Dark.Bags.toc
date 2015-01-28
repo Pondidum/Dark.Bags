@@ -11,8 +11,8 @@ initialise.lua
 controllers\uiIntegrationController.lua
 controllers\bar.lua
 
-models\classifier.lua
-models\classifiers\equipmentSet.lua
+# models\classifier.lua
+# models\classifiers\equipmentSet.lua
 models\itemModel.lua
 models\model.lua
 
