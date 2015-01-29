@@ -14,16 +14,11 @@ local model = {
 
 		local quickScan = function()
 
-			classifiers.beforeClassify()
-
-				for bagID, slots in pairs(storage) do
-					for slotID, contents in pairs(slots) do
-						contents:update()
-						contents:classify(classifiers)
-					end
+			for bagID, slots in pairs(storage) do
+				for slotID, contents in pairs(slots) do
+					contents:update()
 				end
-
-			classifiers.afterClassify()
+			end
 
 		end
 
