@@ -7,8 +7,8 @@ local run = function()
 	local pack = sets.bag:new()
 	local bank = sets.bank:new()
 
-	local ui = ns.controllers.uiIntegration.new(pack.frame, bank.frame)
-	ui.hook()
+	local ui = ns.controllers.uiIntegration:new(pack.frame, bank.frame)
+	ui:hook()
 
 	local gold = ns.goldDisplay.new()
 	local currency = ns.currencyDisplay.new()

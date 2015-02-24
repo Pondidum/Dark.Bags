@@ -1,20 +1,35 @@
 local addon, ns = ...
 
-local core = Dark.core
-local events = core.events.new()
+local class = ns.lib.class
+local events = ns.lib.events
 
-local uiIntegration = {
+local integration = class:extend({
 
-	new = function(bagContainer, bankContainer)
+	ctor = function(self, bagContainer, bankContainer)
+		self:include(events)
+		self.bagContainer = bagContainer
+		self.bankContainer = bankContainer
 
-		local originalToggleBackpack = ToggleBackpack
-		local originalToggleBag = ToggleBag
-		local originalToggleAllBags = ToggleAllBags
+		self.originalToggleBackpack = ToggleBackpack
+		self.originalToggleBag = ToggleBag
+		self.originalToggleAllBags = ToggleAllBags
 
-		local originalOpenAllBags = OpenAllBags
-		local originalOpenBackpack = OpenBackpack
-		local originalCloseAllBags = CloseAllBags
-		local originalCloseBackpack = CloseBackpack
+		self.originalOpenAllBags = OpenAllBags
+		self.originalOpenBackpack = OpenBackpack
+		self.originalCloseAllBags = CloseAllBags
+		self.originalCloseBackpack = CloseBackpack
+
+	end,
+
+	hook = function(self)
+
+		local bagContainer = self.bagContainer
+		local bankContainer = self.bankContainer
+
+		tinsert(UISpecialFrames, bagContainer:GetName())
+
+		UIPanelWindows[bankContainer:GetName()] = {area = "left", pushable = 1 }
+
 
 		local showBag = function()
 			bagContainer:Show()
@@ -32,68 +47,68 @@ local uiIntegration = {
 			end
 		end
 
-		local showBank = function()
-			ShowUIPanel(bankContainer)
-		end
+		OpenAllBags = showBag
+		OpenBackpack = showBag
+		CloseAllBags = hideBag
+		CloseBackpack = hideBag
 
-		local hideBank = function()
-			CloseBankFrame()
+		ToggleBackpack = toggleBag
+		ToggleAllBags = toggleBag
 
-			if bankContainer:IsShown() then
-				HideUIPanel(bankContainer)
-			end
-		end
+		BankFrame:UnregisterAllEvents()
 
-		local hook = function()
-			tinsert(UISpecialFrames, bagContainer:GetName())
-
-			UIPanelWindows[bankContainer:GetName()] = {area = "left", pushable = 1 }
-
-			OpenAllBags = showBag
-			OpenBackpack = showBag
-			CloseAllBags = hideBag
-			CloseBackpack = hideBag
-
-			ToggleBackpack = toggleBag
-			ToggleAllBags = toggleBag
-
-			BankFrame:UnregisterAllEvents()
-
-			events.register("BANKFRAME_OPENED", showBank)
-			events.register("BANKFRAME_CLOSED", function() HideUIPanel(bankContainer) end)
-			bankContainer:SetScript("OnHide", hideBank)
-
-		end
-
-		local unhook = function()
-			tremove(UISpecialFrames, bagContainer:GetName())
-
-			OpenAllBags = originalOpenAllBags
-			OpenBackpack = originalOpenBackpack
-			CloseAllBags = originalCloseAllBags
-			CloseBackpack = originalCloseBackpack
-
-			ToggleBackpack = originalToggleBackpack
-			ToggleBag = originalToggleBag
-			ToggleAllBags = originalToggleAllBags
-
-			BankFrame:RegisterEvent("BANKFRAME_OPENED")
-			BankFrame:RegisterEvent("BANKFRAME_CLOSED")
-
-			events.unregister("BANKFRAME_OPENED")
-			events.unregister("BANKFRAME_CLOSED")
-			bankContainer:SetScript("OnHide", nil)
-		end
-
-		local this = {}
-
-		this.hook = hook
-		this.unhook = unhook
-
-		return this
+		self:register("BANKFRAME_OPENED")
+		self:register("BANKFRAME_CLOSED")
+		bankContainer:SetScript("OnHide", function() self:hideBank() end)
 
 	end,
 
-}
+	unhook = function(self)
 
-ns.controllers.uiIntegration = uiIntegration
+		local bagContainer = self.bagContainer
+		local bankContainer = self.bankContainer
+
+		tremove(UISpecialFrames, bagContainer:GetName())
+
+		OpenAllBags = self.originalOpenAllBags
+		OpenBackpack = self.originalOpenBackpack
+		CloseAllBags = self.originalCloseAllBags
+		CloseBackpack = self.originalCloseBackpack
+
+		ToggleBackpack = self.originalToggleBackpack
+		ToggleBag = self.originalToggleBag
+		ToggleAllBags = self.originalToggleAllBags
+
+		BankFrame:RegisterEvent("BANKFRAME_OPENED")
+		BankFrame:RegisterEvent("BANKFRAME_CLOSED")
+
+		self:unregister("BANKFRAME_OPENED")
+		self:unregister("BANKFRAME_CLOSED")
+		bankContainer:SetScript("OnHide", nil)
+
+	end,
+
+	BANKFRAME_OPENED = function(self)
+		self:showBank()
+	end,
+
+	BANKFRAME_CLOSED = function(self)
+		HideUIPanel(self.bankContainer)
+	end,
+
+
+	showBank = function(self)
+		ShowUIPanel(self.bankContainer)
+	end,
+
+	hideBank = function(self)
+		CloseBankFrame()
+
+		if self.bankContainer:IsShown() then
+			HideUIPanel(self.bankContainer)
+		end
+	end,
+
+})
+
+ns.controllers.uiIntegration = integration
