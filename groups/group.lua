@@ -2,7 +2,6 @@ local addon, ns = ...
 
 local core = Dark.core
 local layout = core.layout
-local style = core.style
 
 local group = {
 

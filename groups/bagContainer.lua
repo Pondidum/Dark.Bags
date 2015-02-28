@@ -1,7 +1,7 @@
 local addon, ns = ...
 
 local core = Dark.core
-local style = core.style
+local style = ns.lib.style
 
 local group = ns.group
 local groups = ns.groups
@@ -27,8 +27,7 @@ groups.bagContainer = {
 				group.frame:SetPoint("LEFT")
 				group.frame:SetPoint("RIGHT")
 
-				style.addBackground(group.frame)
-				style.addShadow(group.frame)
+				style:frame(group.frame)
 
 				this:add(group)
 				childGroups[bagID] = group
