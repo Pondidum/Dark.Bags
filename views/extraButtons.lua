@@ -2,7 +2,7 @@ local addon, ns = ...
 
 local core = Dark.core
 
-local style = core.style
+local style = ns.lib.style
 local events = core.events:new()
 
 local config = ns.config
@@ -47,7 +47,7 @@ local extraButtons = {
 
 		local button = CreateFrame("Button", "$parentReagents", self.frame, "ActionButtonTemplate")
 		button:SetSize(config.buttonSize * 4, config.buttonSize)
-		style.actionButton(button)
+		style:actionButton(button)
 
 		local text = core.ui.createFont(button)
 		text:SetAllPoints()

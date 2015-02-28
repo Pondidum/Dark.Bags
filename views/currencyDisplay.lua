@@ -1,7 +1,7 @@
 local addon, ns = ...
 
 local core = Dark.core
-local style = core.style
+local style = ns.lib.style
 local events = core.events.new()
 local ui = core.ui
 
@@ -58,8 +58,7 @@ local currencyDisplay = {
 		frame:SetPoint("BOTTOMRIGHT", DarkBagsGold, "TOPRIGHT", 0, 4)
 		frame:SetHeight(15)
 
-		style.applyBackgroundTo(frame)
-		style.addShadow(frame)
+		style:frame(frame)
 
 		local prev
 		local updates = {}

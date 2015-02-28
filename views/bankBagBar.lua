@@ -2,7 +2,7 @@ local addon, ns = ...
 
 local core = Dark.core
 
-local style = core.style
+local style = ns.lib.style
 local events = core.events:new()
 
 local config = ns.config
@@ -47,7 +47,7 @@ local bank = ns.controllers.bar:extend({
 		button:SetSize(config.buttonSize, config.buttonSize)
 		button:Show()
 
-		style.itemButton(button)
+		style:itemButton(button)
 
 		button:SetScript("OnClick", function(this)
 

@@ -12,7 +12,8 @@ local initialise = function()
 
 	ns.lib = {
 		class = dark.class,
-		events = dark.events
+		events = dark.events,
+		style = dark.style,
 	}
 
 end

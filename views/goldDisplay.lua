@@ -1,7 +1,7 @@
 local addon, ns = ...
 
 local core = Dark.core
-local style = core.style
+local style = ns.lib.style
 local events = core.events.new()
 local ui = core.ui
 
@@ -50,8 +50,7 @@ local goldDisplay = {
 		frame:SetPoint("BOTTOMRIGHT", DarkBagFrame, "TOPRIGHT", 0, 4)
 		frame:SetHeight(15)
 
-		style.applyBackgroundTo(frame)
-		style.addShadow(frame)
+		style:frame(frame)
 
 		local label = ui.createFont(frame)
 		label:SetPoint("TOPLEFT", 1, 0)

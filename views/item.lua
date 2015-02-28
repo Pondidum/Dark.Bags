@@ -1,7 +1,7 @@
 local addon, ns = ...
 
 local core = Dark.core
-local style = core.style
+local style = ns.lib.style
 
 local config = ns.config
 
@@ -20,7 +20,7 @@ ns.views.item = {
 		this:ClearAllPoints()
 		this:SetSize(config.buttonSize, config.buttonSize)
 
-		style.addShadow(this)
+		style:border(this)
 
 		this.BattlepayItemTexture:SetTexture(nil)
 		this.BattlepayItemTexture:Hide()
