@@ -1,6 +1,6 @@
 local addon, ns = ...
 
-local core = Dark.core
+local colors = ns.lib.colors
 
 local itemModel = {
 
@@ -29,7 +29,7 @@ local itemModel = {
 		self.count = count
 		self.locked = locked
 		self.quality = quality
-		self.qualityColor = { r, g, b, core.colors.shadow[4] }
+		self.qualityColor = { r, g, b, colors.shadow[4] }
 		self.readable = readable
 		self.lootable = lootable
 		self.link = link

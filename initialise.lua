@@ -14,6 +14,7 @@ local initialise = function()
 		class = dark.class,
 		events = dark.events,
 		style = dark.style,
+		colors = dark.media.colors,
 	}
 
 end

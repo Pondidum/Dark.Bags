@@ -1,6 +1,6 @@
 local addon, ns = ...
 
-local core = Dark.core
+local colors = ns.lib.colors
 local style = ns.lib.style
 
 local config = ns.config
@@ -56,7 +56,7 @@ ns.views.item = {
 			if details.quality and details.quality > 1 then
 				this.shadow:SetBackdropBorderColor(unpack(details.qualityColor))
 			else
-				this.shadow:SetBackdropBorderColor(unpack(core.colors.shadow))
+				this.shadow:SetBackdropBorderColor(unpack(colors.shadow))
 			end
 
 			icon:SetDesaturated(details.locked)
