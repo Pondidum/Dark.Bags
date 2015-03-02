@@ -3,6 +3,7 @@ local addon, ns = ...
 local core = Dark.core
 
 local style = ns.lib.style
+local fonts = ns.lib.fonts
 local events = core.events:new()
 
 local config = ns.config
@@ -49,7 +50,7 @@ local extraButtons = {
 		button:SetSize(config.buttonSize * 4, config.buttonSize)
 		style:actionButton(button)
 
-		local text = core.ui.createFont(button)
+		local text = fonts:create(button)
 		text:SetAllPoints()
 		text:SetJustifyH("CENTER")
 		text:SetText("Deposit Reagents")
