@@ -1,6 +1,5 @@
 local addon, ns = ...
 
-local core = Dark.core
 local style = ns.lib.style
 
 local group = ns.group
