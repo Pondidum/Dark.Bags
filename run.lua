@@ -10,7 +10,7 @@ local run = function()
 	local ui = ns.controllers.uiIntegration:new(pack.frame, bank.frame)
 	ui:hook()
 
-	local gold = ns.goldDisplay.new()
+	local gold = ns.goldDisplay:new()
 	local currency = ns.currencyDisplay.new()
 
 end
