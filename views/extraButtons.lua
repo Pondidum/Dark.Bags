@@ -1,50 +1,38 @@
 local addon, ns = ...
 
-local core = Dark.core
-
 local style = ns.lib.style
 local fonts = ns.lib.fonts
-local events = core.events:new()
+
+local class = ns.lib.class
+local events = ns.lib.events
 
 local config = ns.config
 
-local extraButtons = {
+local extraButtons = class:extend({
 
-	new = function(self,  ...)
-
-		local this = setmetatable({}, { __index = self })
-		this:ctor(...)
-
-		return this
-	end,
+	events = {
+		"BANKFRAME_OPENED",
+		"BANKFRAME_CLOSED",
+	},
 
 	ctor = function(self)
+		self:include(events)
+		self:createUI()
+
+	end,
+
+	BANKFRAME_OPENED = function(self)
+		self.frame:Show()
+	end,
+
+	BANKFRAME_CLOSED = function(self)
+		self.frame:Hide()
+	end,
+
+	createUI = function(self)
 
 		self.frame = CreateFrame("Frame", "DarkBankExtraButtons", UIParent)
 		self.frame:SetSize(0, config.buttonSize)
-
-		self:registerEvents()
-		self:addButtons()
-
-	end,
-
-	registerEvents = function(self)
-
-		local eventStore = core.events:new()
-
-		eventStore.register("BANKFRAME_OPENED", function()
-			self.frame:Show()
-		end)
-
-		eventStore.register("BANKFRAME_CLOSED", function()
-			self.frame:Hide()
-		end)
-
-		self.frame:Hide()
-
-	end,
-
-	addButtons = function(self)
 
 		local button = CreateFrame("Button", "$parentReagents", self.frame, "ActionButtonTemplate")
 		button:SetSize(config.buttonSize * 4, config.buttonSize)
@@ -62,7 +50,8 @@ local extraButtons = {
 		button:SetPoint("LEFT", config.buttonSize, 0)
 
 		self.frame:SetWidth(self.frame:GetWidth() + config.buttonSize + button:GetWidth())
+		self.frame:Hide()
 	end,
-}
+})
 
 ns.extraButtons = extraButtons
