@@ -23,14 +23,14 @@ local containerSet = {
 			return views.item.new(self.name .. "BagItem"..i)
 		end)
 
-		local model = ns.model.new(self.containers)
+		local model = ns.model:new(self.containers)
 		local view = groups.bagContainer.new(self.name, UIParent, cache)
 
 		self:customise(view.frame)
 
 		model.onContentsChanged = function()
 			cache.recycleAll()
-			view.populate(model.getContents())
+			view.populate(model:getContents())
 		end
 
 		model.onCooldownsUpdated = function()
