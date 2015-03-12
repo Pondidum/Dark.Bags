@@ -19,7 +19,7 @@ groups.bagGroup = {
 
 			for k, details in pairs(contents) do
 
-				local item = itemViewCache.get()
+				local item = itemViewCache:get()
 				item:SetParent(this.frame)
 
 				item.setDetails(details)

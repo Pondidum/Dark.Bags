@@ -1,8 +1,17 @@
 local addon, ns = ...
 
-local core = Dark.core
 local views = ns.views
 local groups = ns.groups
+
+
+local cache = ns.lib.cache:extend({
+
+	onCreate = function(self, i)
+		return views.item.new(self.name .. "BagItem"..i)
+	end,
+
+})
+
 
 local containerSet = {
 
@@ -19,17 +28,16 @@ local containerSet = {
 
 	ctor = function(self)
 
-		local cache = core.cache.new(function(i)
-			return views.item.new(self.name .. "BagItem"..i)
-		end)
+		local itemCache = cache:new()
+		itemCache.name = self.name
 
 		local model = ns.model:new(self.containers)
-		local view = groups.bagContainer.new(self.name, UIParent, cache)
+		local view = groups.bagContainer.new(self.name, UIParent, itemCache)
 
 		self:customise(view.frame)
 
 		model.onContentsChanged = function()
-			cache.recycleAll()
+			itemCache:recycleAll()
 			view.populate(model:getContents())
 		end
 

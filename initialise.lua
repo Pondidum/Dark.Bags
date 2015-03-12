@@ -13,6 +13,7 @@ local initialise = function()
 	ns.lib = {
 		class = dark.class,
 		events = dark.events,
+		cache = dark.mixins.cache,
 		style = dark.style,
 		colors = dark.media.colors,
 		fonts = dark.media.fonts,
