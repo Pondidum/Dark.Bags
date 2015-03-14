@@ -1,22 +1,14 @@
 local addon, ns = ...
 
-local core = Dark.core
+local class = ns.lib.class
+local events = ns.lib.events
+
 local style = ns.lib.style
-local events = core.events.new()
-local ui = core.ui
+local fonts = ns.lib.fonts
 
 local config = ns.config
 
-local currencyItem = {
-
-	new = function(self, ...)
-
-		local this = setmetatable({}, { __index = self })
-		this:ctor(...)
-
-		return this
-
-	end,
+local currencyItem = class:extend({
 
 	ctor = function(self, currencyID)
 
@@ -27,7 +19,7 @@ local currencyItem = {
 		icon:SetPoint("LEFT", 1, 0)
 		icon:SetSize(15, 15)
 
-		local label = ui.createFont(frame)
+		local label = fonts:create(frame)
 		label:SetPoint("LEFT", icon, "RIGHT", 1, 0)
 		label:SetPoint("RIGHT")
 		label:SetHeight(15)
@@ -47,11 +39,19 @@ local currencyItem = {
 		self.label:SetText(amount)
 
 	end
-}
+})
 
+local currencyDisplay = class:extend({
 
-local currencyDisplay = {
-	new = function()
+	ctor = function(self)
+		self:include(events)
+
+		self:createUI()
+		self:CURRENCY_DISPLAY_UPDATE()
+
+	end,
+
+	createUI = function(self)
 
 		local frame = CreateFrame("Frame", "DarkBagsCurrency", UIParent)
 		frame:SetPoint("BOTTOMLEFT", DarkBagsGold, "TOPLEFT", 0, 4)
@@ -61,7 +61,7 @@ local currencyDisplay = {
 		style:frame(frame)
 
 		local prev
-		local updates = {}
+		local frames = {}
 
 		for i, currencyID in ipairs(config.currencies) do
 
@@ -75,20 +75,20 @@ local currencyDisplay = {
 			end
 
 			prev = item.frame
-			table.insert(updates, function() item:update() end)
+			table.insert(frames, item)
 		end
 
-		local updateAll = function()
-			for i, update in ipairs(updates) do
-				update()
-			end
+		self.frames = frames
+
+	end,
+
+	CURRENCY_DISPLAY_UPDATE = function(self)
+
+		for i, frame in ipairs(self.frames) do
+			frame:update()
 		end
 
-		events.register("CURRENCY_DISPLAY_UPDATE", updateAll)
-
-		updateAll()
-
-	end
-}
+	end,
+})
 
 ns.currencyDisplay = currencyDisplay
