@@ -47,6 +47,8 @@ local currencyDisplay = class:extend({
 		self:include(events)
 
 		self:createUI()
+
+		self:register("CURRENCY_DISPLAY_UPDATE")
 		self:CURRENCY_DISPLAY_UPDATE()
 
 	end,
