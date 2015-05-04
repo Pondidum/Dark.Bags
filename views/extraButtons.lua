@@ -34,7 +34,7 @@ local extraButtons = class:extend({
 		self.frame = CreateFrame("Frame", "DarkBankExtraButtons", UIParent)
 		self.frame:SetSize(0, config.buttonSize)
 
-		local button = CreateFrame("Button", "$parentReagents", self.frame, "ActionButtonTemplate")
+		local button = CreateFrame("CheckButton", "$parentReagents", self.frame, "ActionButtonTemplate")
 		button:SetSize(config.buttonSize * 4, config.buttonSize)
 		style:actionButton(button)
 
