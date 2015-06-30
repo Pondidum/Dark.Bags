@@ -7,7 +7,7 @@ local config = {
 	currencies = {
 		823, -- apexis
 		824,  -- garrison resources
-		994, -- seal of tempered fate
+		1129, -- seal of inevitable fate
 	}
 }
 
